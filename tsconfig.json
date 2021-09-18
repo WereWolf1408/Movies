@@ -9,9 +9,9 @@
     "allowJs": true,
     "moduleResolution": "node",
     "allowSyntheticDefaultImports": true,
-    "baseUrl": ".",
+    "baseUrl": "./src",
     "paths": {
-      "@utils/*": ["/src/utils/*"]
+      "@utils/*": ["./utils/*"]
     }
   },
 

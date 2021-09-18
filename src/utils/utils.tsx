@@ -1,3 +1,3 @@
-export const exampleFunction = () => {
-  console.log('eexample function call');
+export const printMessage = (value: string) => {
+  console.log(value);
 };

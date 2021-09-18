@@ -1,12 +1,8 @@
 import React, { useEffect } from 'react';
 import { Header } from './Header';
-import { Example, Example1 } from './example';
-/** @ts-ignore */
-import { exampleFunction } from '@utils/utils';
+import { printMessage } from '@utils/utils';
 
 import './App.less';
-
-const title = 'React App';
 
 const CLASSES = {
   NETFLIX_APP: 'netflix-app',
@@ -15,14 +11,13 @@ const CLASSES = {
 
 export const App = () => {
   useEffect(() => {
-    exampleFunction();
+    printMessage('called useEffect function');
   });
+
   return (
     <section className={CLASSES.NETFLIX_APP}>
       <Header title={'React App'} />
       <span>simple text</span>
-      <Example />
-      <Example1 />
     </section>
   );
 };
