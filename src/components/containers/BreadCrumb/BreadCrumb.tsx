@@ -1,10 +1,9 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Dropdown } from '../../common/Dropdown';
+import {Dropdown} from '../../common/Dropdown';
+import { sortOptions, genres } from '@utils/utils';
 
 import './BreadCrumb.less';
-
-const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];
 
 const CLASSES = {
   NETFLIX_APP_BREADCRUMB: 'netflix-app__breadcrumb',
@@ -61,7 +60,7 @@ export const BreadCrumb = () => {
       <div className={CLASSES.NETFLIX_APP_BREADCRUMB_GENRE}>{renderGenreList()}</div>
       <div className={CLASSES.NETFLIX_APP_BREADCRUMB_SORT}>
         <span className={CLASSES.NETFLIX_APP_BREADCRUMB_LABEL}>Sort by</span>
-        <Dropdown />
+        <Dropdown options={sortOptions} dropdownType={'simple'} />
       </div>
     </section>
   );

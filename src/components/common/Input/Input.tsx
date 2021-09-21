@@ -10,22 +10,25 @@ const CLASSES = {
 
 interface InputProps {
   (props: {
-    keyPressHandler: () => void;
+    changeHandler: (event: React.FormEvent<HTMLInputElement>) => void;
     placeHolder?: string;
     classes?: string;
+    value?: string;
   }): JSX.Element;
 }
 
 export const Input: InputProps = ({
   placeHolder = 'What do you want to watch?',
   classes,
-  keyPressHandler,
+  changeHandler,
+  value,
 }) => {
   return (
     <input
       className={classnames(CLASSES.NETFLIX_INPUT, classes)}
       placeholder={placeHolder}
-      onKeyPress={keyPressHandler}
+      onChange={changeHandler}
+      value={value}
     />
   );
 };

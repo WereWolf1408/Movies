@@ -1,6 +1,6 @@
 import React from 'react';
 import { BreadCrumb } from '../BreadCrumb';
-import { MovieList } from '../MovieList';
+import {MovieList} from '../MovieList/MovieList';
 import { movies } from '@utils/utils';
 
 import './MovieBody.less';

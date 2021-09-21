@@ -15,6 +15,99 @@ export const Logo = ({ classes }: { classes: string }): JSX.Element => (
   </svg>
 );
 
+export const CloseIcon = ({
+  classes,
+  clickHandler,
+}: {
+  classes: string;
+  clickHandler?: () => void;
+}): JSX.Element => (
+  <svg
+    onClick={clickHandler}
+    className={classes}
+    width="23"
+    height="24"
+    viewBox="0 0 23 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path
+      d="M1.47099 2.15426L21.529 22.2122"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+    <path
+      d="M21.529 2.15426L1.47103 22.2122"
+      stroke="white"
+      strokeWidth="2"
+      strokeLinecap="round"
+    />
+  </svg>
+);
+
+interface ToolsIconProps {
+  (props: { classes: string; clickHandler?: () => void }): JSX.Element;
+}
+
+export const ToolsIcon: ToolsIconProps = ({
+  classes,
+  clickHandler,
+}): JSX.Element => (
+  <svg
+    className={classes}
+    onClick={clickHandler}
+    width="44"
+    height="44"
+    viewBox="0 0 44 44"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g filter="url(#filter0_d)">
+      <circle cx="22" cy="22" r="18" fill="#2A202D" />
+    </g>
+    <circle cx="22" cy="15" r="2" fill="white" />
+    <circle cx="22" cy="22.5" r="2" fill="white" />
+    <circle cx="22" cy="30" r="2" fill="white" />
+    <defs>
+      <filter
+        id="filter0_d"
+        x="0"
+        y="0"
+        width="44"
+        height="44"
+        filterUnits="userSpaceOnUse"
+        colorInterpolationFilters="sRGB"
+      >
+        <feFlood floodOpacity="0" result="BackgroundImageFix" />
+        <feColorMatrix
+          in="SourceAlpha"
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0"
+          result="hardAlpha"
+        />
+        <feOffset />
+        <feGaussianBlur stdDeviation="2" />
+        <feColorMatrix
+          type="matrix"
+          values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.196596 0"
+        />
+        <feBlend
+          mode="normal"
+          in2="BackgroundImageFix"
+          result="effect1_dropShadow"
+        />
+        <feBlend
+          mode="normal"
+          in="SourceGraphic"
+          in2="effect1_dropShadow"
+          result="shape"
+        />
+      </filter>
+    </defs>
+  </svg>
+);
+
 //mock data
 export const movies = [
   {
@@ -54,3 +147,6 @@ export const movies = [
     genre: 'Oscar winning Movie',
   },
 ];
+
+export const sortOptions = ['Title', 'Year', 'Genre'];
+export const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];

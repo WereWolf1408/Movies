@@ -1,5 +1,5 @@
 import React from 'react';
-import { MovieItem } from '@common/MovieItem';
+import {MovieItem} from '@common/MovieItem';
 import { SingleMovieProps } from '@utils/interfaces';
 
 import './MovieList.less';
@@ -12,14 +12,10 @@ interface MovieListProps {
   (props: { items: Array<SingleMovieProps> }): JSX.Element;
 }
 
-export const MovieList: MovieListProps = ({ items }) => {
-  const renderMovies = () => (
-    <ul className={CLASSES.NETFLIX_APP_MOVIE_LIST}>
-      {items.map((item, index) => (
-        <MovieItem key={index} item={item} />
-      ))}
-    </ul>
-  );
-
-  return renderMovies();
-};
+export const MovieList: MovieListProps = ({ items }) => (
+  <ul className={CLASSES.NETFLIX_APP_MOVIE_LIST}>
+    {items.map((item, index) => (
+      <MovieItem key={index} item={item} />
+    ))}
+  </ul>
+);

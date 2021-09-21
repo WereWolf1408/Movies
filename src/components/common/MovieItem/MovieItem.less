@@ -1,6 +1,7 @@
 @import '@styles/colors.less';
 
 .netflix-app__movie {
+  position: relative;
   display: flex;
   flex-direction: column;
   max-width: 31.9rem;
@@ -21,17 +22,58 @@
     font-weight: 500;
     font-size: 1.8rem;
     line-height: 2.2rem;
-    opacity: .7;
+    opacity: 0.7;
 
     :nth-child(2) {
       border: 1px solid @color-dusty-gray;
-      padding: .4rem .8rem;
-      border-radius: .4rem;
+      padding: 0.4rem 0.8rem;
+      border-radius: 0.4rem;
     }
   }
 
   &-genre {
     margin-top: 0.8rem;
-    opacity: .5;
+    opacity: 0.5;
+  }
+
+  &-tools {
+    position: absolute;
+    height: 3.6rem;
+    width: 3.6rem;
+    right: 1.4rem;
+    top: 1.4rem;
+    border-radius: 50%;
+    background-color: @color-bastille;
+  }
+
+  &-tools-window {
+    position: absolute;
+    right: 1.4rem;
+    top: 1.4rem;
+    padding: 2.4rem 0 1.2rem 0;
+    background-color: @color-mine-shaft;
+    color: @color-white;
+  }
+
+  &-tools-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 3.4rem;
+    width: 19rem;
+    cursor: pointer;
+
+    &:hover {
+      background: @color-carnation;
+    }
+  }
+
+  &-tools-close {
+    position: absolute;
+    height: 1.1rem;
+    width: 1.1rem;
+    right: 0.7rem;
+    top: 0.7rem;
+    cursor: pointer;
   }
 }

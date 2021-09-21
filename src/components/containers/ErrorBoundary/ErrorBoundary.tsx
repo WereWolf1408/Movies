@@ -10,7 +10,12 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryProps> {
     this.state = { hasError: false };
   }
 
-	//depricated
+  static getDerivedStateFromError(error: Error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  //depricated
   componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ hasError: true });
   }

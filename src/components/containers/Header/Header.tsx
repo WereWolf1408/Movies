@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react';
-import { Button } from '@common/Button';
-import { Input } from '@common/Input';
+import React from 'react';
+import {Button} from '@common/Button';
+import {Input} from '@common/Input';
 import { Logo } from '@utils/utils';
 import BackgroundImage from '@assets/header_background.jpg';
 
@@ -18,22 +18,21 @@ const CLASSES = {
 };
 
 interface HeaderProps {
-  (props: { title: string }): JSX.Element;
+  (props: { title: string; addMovieClickHandler: () => void }): JSX.Element;
 }
 
-export const Header: HeaderProps = ({ title }) => {
-
+export const Header: HeaderProps = ({ title, addMovieClickHandler }) => {
   return (
     <section className={CLASSES.NETFLIX_APP_HEADER}>
       <img className={CLASSES.NETFLIX_APP_BACKGROUND} src={BackgroundImage} alt="" />
       <Logo classes={CLASSES.NETFLIX_APP_LOGO} />
-      <div className={CLASSES.NETFLIX_APP_ADD_MOVIE}>
+      <div className={CLASSES.NETFLIX_APP_ADD_MOVIE} onClick={addMovieClickHandler}>
         <Button text={'+ add movie'} />
       </div>
       <span className={CLASSES.NETFLIX_APP_TITLE}>{title}</span>
       <div className={CLASSES.NETFLIX_APP_SEARCH_SECTION}>
         <Input
-          keyPressHandler={() => {
+          changeHandler={() => {
             console.log('mock press handler');
           }}
           classes={CLASSES.NETFLIX_APP_SEARCH}

@@ -2,7 +2,7 @@
   "name": "netflix-shadow-copy",
   "version": "1.0.0",
   "description": "webpack for netflix application",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve --open --env NODE_ENV=dev",
     "build": "webpack --mode production",
@@ -38,6 +38,7 @@
     "prettier": "2.4.0",
     "style-loader": "^3.2.1",
     "ts-loader": "^9.2.5",
+    "tsconfig-paths-webpack-plugin": "^3.5.1",
     "typescript": "^4.4.3",
     "webpack": "^5.52.1",
     "webpack-cli": "^4.8.0",
