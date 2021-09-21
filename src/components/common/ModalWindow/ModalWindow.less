@@ -1,0 +1,33 @@
+@import '@styles/colors.less';
+
+.netflix-app__modal-window {
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background: rgba(35, 35, 35, .6);
+  z-index: 10;
+
+  &-child-container {
+    position: relative;
+    margin: 23.8rem 0 auto 0;
+    padding: 0 6rem 6rem;
+    background-color: @color-mine-shaft;
+  }
+
+  &-close {
+    position: absolute;
+    right: 3rem;
+    top: 3rem;
+    cursor: pointer;
+  }
+
+  &-title {
+    font-size: 4rem;
+    text-transform: uppercase;
+    color: @color-white;
+  }
+}

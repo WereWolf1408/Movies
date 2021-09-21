@@ -1,9 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
-console.log('******************************');
-console.log(path.resolve(__dirname, 'assets'));
-
 module.exports = {
   entry: './src/index.tsx',
   output: {
@@ -52,13 +49,16 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@utils': path.resolve(__dirname, 'src/utils/'),
+      '@utils': path.resolve(__dirname, './src/utils'),
+      '@assets': path.resolve(__dirname, './assets'),
+      '@styles': path.resolve(__dirname, './src/styles'),
+      '@common': path.resolve(__dirname, './src/components/common'),
     },
     extensions: ['.ts', '.tsx', '.js', '.jsx'],
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './src/index.html',
+      template: './template/index.html',
     }),
   ],
 };
