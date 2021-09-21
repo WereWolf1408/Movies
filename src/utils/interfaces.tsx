@@ -4,3 +4,21 @@ export interface SingleMovieProps {
   year: number;
   genre: string;
 }
+
+export interface DropdownCallbackProps {
+  (value: Array<string> | string): void;
+}
+
+export type HeaderComponentProps = {
+  title: string;
+  addMovieClickHandler: () => void;
+};
+
+export interface formDataReceived {
+  title: string;
+  movieURL: string;
+  genre: Array<string>;
+  releaseDate: string;
+  rating: number;
+  runTime: string;
+}

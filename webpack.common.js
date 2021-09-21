@@ -1,5 +1,6 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
   entry: './src/index.tsx',
@@ -60,5 +61,7 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './template/index.html',
     }),
+    //try to set up later
+    // new TsconfigPathsPlugin(),
   ],
 };
