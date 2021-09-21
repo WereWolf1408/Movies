@@ -1,0 +1,56 @@
+@import '@styles/colors.less';
+
+.netflix-app__breadcrumb {
+  display: flex;
+  padding: 2rem 0 1.9rem;
+  border-bottom: 2px solid @color-cod-gray;
+  color: @color-white;
+
+  &-genre {
+    flex-grow: 1;
+  }
+
+  &-item,
+  &-label {
+    font-size: 1.6rem;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: pointer;
+  }
+
+  &-item {
+    position: relative;
+
+    &:not(:first-child) {
+      margin-left: 3rem;
+    }
+
+    &:after {
+      content: "";
+      position: absolute;
+      display: none;
+      height: .4rem;
+      width: 100%;
+      top: 3.4rem;
+      left: 0;
+      background: red;
+    }
+
+    &.active {
+      &:after {
+        display: block;
+      }
+    }
+  }
+
+  &-label {
+    margin-right: 3rem;
+  }
+
+  &-sort {
+    .netflix-app__breadcrumb-label {
+      opacity: .6;
+      cursor: none;
+    }
+  }
+}
