@@ -1,13 +1,12 @@
 import React, { useState } from 'react';
-import { Header } from './components/containers/Header';
-import { HandleLoading } from './components/common/HandleLoading';
-import { ErrorBoundary } from './components/containers/ErrorBoundary';
-import { BuggyCounter } from './components/common/BuggyCounter';
-import { MovieBody } from './components/containers/MovieBody';
-import { Footer } from './components/containers/Footer';
-import { FormModal } from './components/containers/FormModal';
-import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
-import { formDataReceived } from '@utils/interfaces';
+import Header from './components/containers/Header';
+import HandleLoading from './components/HOC/HandleLoading';
+import BuggyCounter from './components/common/BuggyCounter';
+import MovieBody from './components/containers/MovieBody';
+import Footer from './components/containers/Footer';
+import FormModal from './components/containers/FormModal';
+import DeleteMovieModal from './components/containers/DeleteMovieModal';
+import { formDataReceived, HeaderComponentProps } from '@utils/interfaces';
 
 import './App.less';
 
@@ -20,7 +19,8 @@ const CLASSES = {
 const HEADER_TITLE = 'find your movie';
 
 export const App = () => {
-  const TestHOCFunction = HandleLoading(Header);
+  const TestHOCFunction =
+    HandleLoading<{ title: string; addMovieClickHandler: () => void }>(Header);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
 
@@ -34,21 +34,29 @@ export const App = () => {
 
   const sendButtonClick = (opt: formDataReceived) => {};
 
+  const addMovieButtonClickHandler = () => {
+    console.log('add movie button was clicked');
+  };
+
   return (
     <section className={CLASSES.NETFLIX_APP}>
-      <ErrorBoundary>
-        <Header title={HEADER_TITLE} addMovieClickHandler={addMovieClickHandler} />
-        <TestHOCFunction isLoading props={{ title: 'test HOC Component' }} />
-        <MovieBody />
-        <Footer />
-        {showModal && (
-          <FormModal
-            resetClickHandler={resetButtonClickHandler}
-            sendButtonClick={sendButtonClick}
-          />
-        )}
-        {showDeleteMovieModal && <DeleteMovieModal />}
-      </ErrorBoundary>
+      <Header title={HEADER_TITLE} addMovieClickHandler={addMovieClickHandler} />
+      <TestHOCFunction
+        isLoading
+        props={{
+          title: 'test HOC Component',
+          addMovieClickHandler: addMovieButtonClickHandler,
+        }}
+      />
+      <MovieBody />
+      <Footer />
+      {showModal && (
+        <FormModal
+          resetClickHandler={resetButtonClickHandler}
+          sendButtonClick={sendButtonClick}
+        />
+      )}
+      {showDeleteMovieModal && <DeleteMovieModal />}
     </section>
   );
 };

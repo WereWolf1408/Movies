@@ -1,10 +1,10 @@
 import React from 'react';
-import { Button } from '@common/Button';
-import { Input } from '@common/Input';
+import Button from '@common/Button';
+import Input from '@common/Input';
 import { Logo } from '@utils/utils';
 import BackgroundImage from '@assets/header_background.jpg';
 
-import './Header.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_APP_LOGO: 'netflix-app__logo',
@@ -21,7 +21,7 @@ interface HeaderProps {
   (props: { title: string; addMovieClickHandler: () => void }): JSX.Element;
 }
 
-export const Header: HeaderProps = ({ title, addMovieClickHandler }) => {
+const Header: HeaderProps = ({ title, addMovieClickHandler }) => {
   return (
     <section className={CLASSES.NETFLIX_APP_HEADER}>
       <img className={CLASSES.NETFLIX_APP_BACKGROUND} src={BackgroundImage} alt="" />
@@ -42,3 +42,5 @@ export const Header: HeaderProps = ({ title, addMovieClickHandler }) => {
     </section>
   );
 };
+
+export default Header;

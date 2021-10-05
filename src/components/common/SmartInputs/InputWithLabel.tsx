@@ -1,5 +1,5 @@
 import React from 'react';
-import { Input } from '../Input';
+import Input from '../Input';
 import { SmartInputProps } from './interfaces';
 
 interface ExtendSmartProps extends SmartInputProps {

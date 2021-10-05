@@ -1,8 +1,8 @@
 import React from 'react';
-import { Button } from '../../common/Button';
-import { ModalWindow } from '../../common/ModalWindow/ModalWindow';
+import Button from '../../common/Button';
+import ModalWindow from '../../common/ModalWindow';
 
-import './DeleteMovieModal.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_APP_DELETE_MODAL: 'netflix-app__delete-movie',
@@ -10,7 +10,7 @@ const CLASSES = {
   NETFLIX_APP_DELETE_MODAL_BUTTON: 'netflix-app__delete-movie-button',
 };
 
-export const DeleteMovieModal = () => {
+const DeleteMovieModal = () => {
   return (
     <ModalWindow title={'delete movie'}>
       <div className={CLASSES.NETFLIX_APP_DELETE_MODAL}>
@@ -26,3 +26,5 @@ export const DeleteMovieModal = () => {
     </ModalWindow>
   );
 };
+
+export default DeleteMovieModal;

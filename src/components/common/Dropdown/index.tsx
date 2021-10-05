@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DropdownCallbackProps } from '@utils/interfaces';
 
-import './Dropdown.less';
+import './style.less';
 import classNames from 'classnames';
 
 const CLASSES = {
@@ -20,7 +20,7 @@ interface DropdownProps {
   }): JSX.Element;
 }
 
-export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
+const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([options[0]]);
@@ -39,13 +39,12 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
     const modifyArr = (): Array<string> => {
       if (checked) {
         optionsHolder.push(option);
-        return optionsHolder;
+        return [...optionsHolder];
       }
       const filteredArr = optionsHolder.filter((value) => value !== option);
       return filteredArr;
     };
     const changedArr = modifyArr();
-    //ask about time to update state!!! there is some delay when you update state. how to handle case when you need new state immediately
     setOptionsHolder(changedArr);
     setSelected(changedArr.toString());
     callback && callback(changedArr);
@@ -92,9 +91,12 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
                 key={index}
                 className={classNames({ ['active']: optionsHolder.includes(item) })}
               >
-                <label htmlFor="" className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX_LABEL}>
+                <label
+                  htmlFor=""
+                  className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX_LABEL}
+                >
                   <input
-                  className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX}
+                    className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX}
                     type="checkbox"
                     value={item}
                     checked={optionsHolder.includes(item)}
@@ -110,3 +112,5 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
     </div>
   );
 };
+
+export default Dropdown;

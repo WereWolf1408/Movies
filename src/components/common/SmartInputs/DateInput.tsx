@@ -17,7 +17,7 @@ export const DateInput: DateInputProps = ({
   labelText,
   classes,
   placeholder,
-  value
+  value,
 }) => {
   return (
     <div className={classNames(classes, 'date-input')}>
@@ -30,7 +30,7 @@ export const DateInput: DateInputProps = ({
         min="2018-01-01"
         max="2018-12-31"
         onChange={changeHandler}
-      ></input>
+      />
     </div>
   );
 };

@@ -4,7 +4,7 @@ interface BuggyCounterState {
   showError: boolean;
 }
 
-export class BuggyCounter extends React.Component<{}, BuggyCounterState> {
+export default class BuggyCounter extends React.Component<{}, BuggyCounterState> {
   constructor(props: unknown) {
     super(props);
     this.state = { showError: false };

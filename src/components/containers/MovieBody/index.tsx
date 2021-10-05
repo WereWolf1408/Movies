@@ -1,9 +1,9 @@
 import React from 'react';
 import { BreadCrumb } from '../BreadCrumb';
-import { MovieList } from '../MovieList';
+import MovieList from '../MovieList';
 import { movies } from '@utils/utils';
 
-import './MovieBody.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE_BODY: 'netflix-app__movie-body',
@@ -11,7 +11,7 @@ const CLASSES = {
   NETFLIX_APP_MOVIE_BODY_LOGO: 'netflix-app__movie-body-logo',
 };
 
-export const MovieBody = () => {
+const MovieBody = () => {
   return (
     <section className={CLASSES.NETFLIX_APP_MOVIE_BODY}>
       <BreadCrumb />
@@ -22,3 +22,5 @@ export const MovieBody = () => {
     </section>
   );
 };
+
+export default MovieBody;
