@@ -4,13 +4,18 @@ interface ErrorBoundaryProps {
   hasError: boolean;
 }
 
-export class ErrorBoundary extends React.Component<{}, ErrorBoundaryProps> {
+class ErrorBoundary extends React.Component<{}, ErrorBoundaryProps> {
   constructor(props: unknown) {
     super(props);
     this.state = { hasError: false };
   }
 
-	//depricated
+  static getDerivedStateFromError(error: Error) {
+    // Update state so the next render will show the fallback UI.
+    return { hasError: true };
+  }
+
+  //depricated
   componentDidCatch(error: Error, info: ErrorInfo) {
     this.setState({ hasError: true });
   }
@@ -22,3 +27,5 @@ export class ErrorBoundary extends React.Component<{}, ErrorBoundaryProps> {
     return this.props.children;
   }
 }
+
+export default ErrorBoundary;

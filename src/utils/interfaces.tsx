@@ -9,6 +9,11 @@ export interface DropdownCallbackProps {
   (value: Array<string> | string): void;
 }
 
+export type HeaderComponentProps = {
+  title: string;
+  addMovieClickHandler: () => void;
+};
+
 export interface formDataReceived {
   title: string;
   movieURL: string;

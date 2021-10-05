@@ -5,10 +5,10 @@ import {
   DropdownInput,
   TextAreaWithLabel,
 } from '../SmartInputs';
-import { Button } from '../Button';
+import Button from '../Button';
 import { formDataReceived } from '@utils/interfaces';
 
-import './Form.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_APP_MODAL_WINDOW_FORM: 'netflix-app__modal-window-form',
@@ -35,7 +35,7 @@ interface FormProps {
   }): JSX.Element;
 }
 
-export const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler }) => {
+const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler }) => {
   const [title, setTitle] = useState('');
   const [movieURL, setMovieURL] = useState('');
   const [genre, setGenre] = useState(['']);
@@ -144,3 +144,5 @@ export const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler })
     </form>
   );
 };
+
+export default Form;

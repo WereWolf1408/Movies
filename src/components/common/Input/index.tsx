@@ -2,7 +2,7 @@ import React from 'react';
 
 const classnames = require('classnames');
 
-import './Input.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_INPUT: 'netflix-app__input',
@@ -17,7 +17,7 @@ interface InputProps {
   }): JSX.Element;
 }
 
-export const Input: InputProps = ({
+const Input: InputProps = ({
   placeHolder = 'What do you want to watch?',
   classes,
   changeHandler,
@@ -32,3 +32,5 @@ export const Input: InputProps = ({
     />
   );
 };
+
+export default Input;

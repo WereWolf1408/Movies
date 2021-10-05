@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import { Dropdown } from '../../common/Dropdown';
+import Dropdown from '../../common/Dropdown';
 import { sortOptions } from '@utils/utils';
 
-import './BreadCrumb.less';
+import './style.less';
 
 const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];
 
@@ -67,3 +67,5 @@ export const BreadCrumb = () => {
     </section>
   );
 };
+
+export default BreadCrumb;

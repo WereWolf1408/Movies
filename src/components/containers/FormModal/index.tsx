@@ -1,6 +1,6 @@
 import React from 'react';
-import { ModalWindow } from '@common/ModalWindow';
-import { Form } from '@common/Form';
+import ModalWindow from '@common/ModalWindow';
+import Form from '@common/Form';
 import { formDataReceived } from '@utils/interfaces';
 
 const CLASSES = {
@@ -14,7 +14,7 @@ interface FormModalProps {
   }): JSX.Element;
 }
 
-export const FormModal: FormModalProps = ({
+const FormModal: FormModalProps = ({
   resetClickHandler,
   sendButtonClick,
 }) => {
@@ -27,3 +27,5 @@ export const FormModal: FormModalProps = ({
     </ModalWindow>
   );
 };
+
+export default FormModal;

@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import { SingleMovieProps } from '@utils/interfaces';
 import { ToolsIcon } from '@utils/utils';
 
-import './MovieItem.less';
+import './style.less';
 import { CloseIcon } from '../../../utils/utils';
-import classNames from 'classnames';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE: 'netflix-app__movie',
@@ -21,7 +20,7 @@ interface MovieItemProps {
   (props: { item: SingleMovieProps }): JSX.Element;
 }
 
-export const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } }) => {
+const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } }) => {
   const [showToolsOption, setShowToolsOption] = useState(false);
 
   //temporary solution, later these functions will be moved in global context
@@ -58,3 +57,5 @@ export const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } })
     </div>
   );
 };
+
+export default MovieItem;

@@ -1,7 +1,7 @@
 import React from 'react';
 const classnames = require('classnames');
 
-import './Button.less';
+import './style.less';
 
 const CLASSES = {
   NETFLIX_BUTTON: 'netflix-app__button',
@@ -11,7 +11,7 @@ interface ButtonProps {
   (props: { text: string; classes?: string; clickHandler?: () => void }): JSX.Element;
 }
 
-export const Button: ButtonProps = ({ text, classes, clickHandler = null }) => {
+const Button: ButtonProps = ({ text, classes, clickHandler = null }) => {
   return (
     <div
       onClick={clickHandler}
@@ -21,3 +21,5 @@ export const Button: ButtonProps = ({ text, classes, clickHandler = null }) => {
     </div>
   );
 };
+
+export default Button;
