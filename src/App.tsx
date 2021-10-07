@@ -1,13 +1,14 @@
-import React, { useState } from 'react';
-import Header from './components/containers/Header';
-import HandleLoading from './components/HOC/HandleLoading';
-import ErrorBoundary from './components/containers/ErrorBoundary';
-import BuggyCounter from './components/common/BuggyCounter';
-import MovieBody from './components/containers/MovieBody';
-import Footer from './components/containers/Footer';
-import FormModal from './components/containers/FormModal';
-import DeleteMovieModal from './components/containers/DeleteMovieModal';
-import { formDataReceived, HeaderComponentProps } from '@utils/interfaces';
+import React, { useContext, useState } from 'react';
+import { Header } from './components/containers/Header';
+import { HandleLoading } from './components/HOC/HandleLoading';
+import { ErrorBoundary } from './components/containers/ErrorBoundary';
+import { MovieBody } from './components/containers/MovieBody';
+import { Footer } from './components/containers/Footer';
+import { AddMovieModal } from './components/containers/AddMovieModal';
+import { EditMovieModal } from './components/containers/EditMovieModal';
+import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
+import { NetflixAppContext } from './Context/Context';
+import { MovieDetails } from './components/containers/MovieDetails';
 
 import './App.less';
 
@@ -19,47 +20,36 @@ const CLASSES = {
 
 const HEADER_TITLE = 'find your movie';
 
+const TestHOCFunction =
+  HandleLoading<{ title: string; addMovieClickHandler: () => void }>(Header);
+
 export const App = () => {
-  const TestHOCFunction =
-    HandleLoading<{ title: string; addMovieClickHandler: () => void }>(Header);
-  const [showModal, setShowModal] = useState<boolean>(false);
+  // i am not sure about place, where i called useContext; because in this case each
+  //Context change will cause re-render whole application
+  //but from the other hand React is quite smart and it's not a fact that react will be called re-render each time
+  const { showAddMovieModal, showDetails, showEditMoviePopup } =
+    useContext(NetflixAppContext);
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
-
-  const addMovieClickHandler = () => {
-    setShowModal(true);
-  };
-
-  const resetButtonClickHandler = () => {
-    setShowModal(false);
-  };
-
-  const sendButtonClick = (opt: formDataReceived) => {};
 
   const addMovieButtonClickHandler = () => {
     console.log('add movie button was clicked');
   };
 
   return (
-    <ErrorBoundary>
-      <section className={CLASSES.NETFLIX_APP}>
-        <Header title={HEADER_TITLE} addMovieClickHandler={addMovieClickHandler} />
-        <TestHOCFunction
-          isLoading
-          props={{
-            title: 'test HOC Component',
-            addMovieClickHandler: addMovieButtonClickHandler,
-          }}
-        />
-        <MovieBody />
-        <Footer />
-        {showModal && (
-          <FormModal
-            resetClickHandler={resetButtonClickHandler}
-            sendButtonClick={sendButtonClick}
-          />
-        )}
-        {showDeleteMovieModal && <DeleteMovieModal />}
-      </section>
-    </ErrorBoundary>
+    <section className={CLASSES.NETFLIX_APP}>
+      {showDetails.value ? <MovieDetails /> : <Header title={HEADER_TITLE} />}
+      <TestHOCFunction
+        isLoading
+        props={{
+          title: 'test HOC Component',
+          addMovieClickHandler: addMovieButtonClickHandler,
+        }}
+      />
+      <MovieBody />
+      <Footer />
+      {showAddMovieModal.value && <AddMovieModal />}
+      {showEditMoviePopup.value && <EditMovieModal />}
+      {showDeleteMovieModal && <DeleteMovieModal />}
+    </section>
   );
 };

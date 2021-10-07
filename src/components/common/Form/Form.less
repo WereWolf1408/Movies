@@ -1,0 +1,90 @@
+@import '@styles/colors.less';
+
+.netflix-app__modal-window-form {
+  max-height: 97.6rem;
+  max-width: 91.7rem;
+  width: 100%;
+  border: 1px solid transparent;
+
+  &-title {
+    color: @color-white;
+    font-weight: 300;
+    font-size: 4rem;
+  }
+
+  &-input-section {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .netflix-app__input-block {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 3rem;
+    flex-grow: 1;
+
+    label {
+      color: @color-carnation;
+      font-weight: 600;
+      font-size: 1.6rem;
+      text-transform: uppercase;
+      margin-bottom: 1.3rem;
+    }
+
+    input,
+    textarea {
+      color: @color-white;
+      background-color: @color-mine;
+    }
+
+    textarea {
+      width: 166%;
+      height: 19.7rem;
+      padding: 2rem;
+      font-size: 2rem;
+      font-weight: 400;
+      border: none;
+    }
+
+    &:nth-child(odd) {
+      width: 100%;
+      max-width: 52.5rem;
+      margin-right: 3rem;
+    }
+
+  }
+
+  &-buttons-section {
+    display: flex;
+    justify-content: flex-end;
+
+    .netflix-app__button {
+      width: 14.4rem;
+      height: 3.5rem;
+      text-transform: uppercase;
+
+      &.submit {
+        height: 5.9rem;
+      }
+
+      &:nth-child(1) {
+        background-color: @color-mine-shaft;
+        border: 1px solid @color-carnation;
+
+        &:hover {
+          color: @color-white;
+        }
+      }
+
+      &:nth-child(2) {
+        margin-left: 1.3rem;
+        color: @color-white;
+
+        &:hover {
+          background-color: @color-scorpion;
+          color: @color-carnation;
+        }
+      }
+    }
+  }
+}
