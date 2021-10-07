@@ -1,0 +1,97 @@
+@import '@styles/colors.less';
+
+.netflix-app__movie-details {
+  display: flex;
+  flex-direction: column;
+  padding: 9.1rem 6rem 2.9rem 6rem;
+  background-color: @color-mine-shaft;
+
+  &-image {
+    height: 48.6rem;
+    width: 32.8rem;
+    flex-shrink: 0;
+
+    img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &-title,
+  &-genre,
+  &-year,
+  &-description {
+    display: block;
+  }
+
+  &-title {
+    font-size: 4rem;
+  }
+
+  &-genre {
+    margin-top: 0.9rem;
+    font-size: 1.4rem;
+    font-weight: 500;
+    opacity: 0.5;
+  }
+
+  &-year,
+  &-duration {
+    margin-top: 3rem;
+    font-size: 2.4rem;
+    font-weight: 500;
+    color: @color-carnation;
+  }
+
+  &-duration {
+    margin-left: 5.1rem;
+  }
+
+  &-description {
+    margin-top: 2.9rem;
+    font-size: 2rem;
+  }
+
+  &-details-section {
+    color: @color-white;
+    margin-left: 5.8rem;
+  }
+
+  &-title-section,
+  &-year-section {
+    display: flex;
+    align-items: center;
+  }
+
+  &-mark {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 6rem;
+    width: 6rem;
+    margin-left: 2.5rem;
+    border: 1px solid @color-white;
+    border-radius: 50%;
+  }
+
+  &-logo-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    top: 3.7em;
+    left: 6rem;
+    right: 6rem;
+    margin-bottom: 3rem;
+
+    svg {
+      &:nth-child(2) {
+        cursor: pointer;
+      }
+    }
+  }
+
+  &-bottom-section {
+    display: flex;
+  }
+}

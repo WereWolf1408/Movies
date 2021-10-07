@@ -6,7 +6,6 @@ import {
   TextAreaWithLabel,
 } from '../SmartInputs';
 import Button from '../Button';
-import { formDataReceived } from '@utils/interfaces';
 
 import './style.less';
 
@@ -30,15 +29,16 @@ type SetFormFieldProps = (
 
 interface FormProps {
   (props: {
-    resetButtonClickHandler: () => void;
-    submitClickHandler: (opt: formDataReceived) => void;
+    titleValue?: string;
+    genreValue?: string;
+    yearValue?: number;
   }): JSX.Element;
 }
 
-const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler }) => {
-  const [title, setTitle] = useState('');
+const Form: FormProps = ({ titleValue = '', yearValue = 2000, genreValue = '' }) => {
+  const [title, setTitle] = useState(titleValue);
   const [movieURL, setMovieURL] = useState('');
-  const [genre, setGenre] = useState(['']);
+  const [genre, setGenre] = useState([genreValue]);
   const [releaseDate, setReleaseDate] = useState('');
   const [rating, setRating] = useState<number>(0);
   const [runTime, setRunTime] = useState('');
@@ -76,14 +76,14 @@ const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler }) => {
   const overviewChangeHandler = (event: React.FormEvent<HTMLTextAreaElement>) => {};
 
   const subminButtonClickHandler = () => {
-    submitClickHandler({
-      title,
-      movieURL,
-      genre,
-      releaseDate,
-      rating,
-      runTime,
-    });
+    // submitClickHandler({
+    //   title,
+    //   movieURL,
+    //   genre,
+    //   releaseDate,
+    //   rating,
+    //   runTime,
+    // });
   };
 
   return (
@@ -138,8 +138,8 @@ const Form: FormProps = ({ resetButtonClickHandler, submitClickHandler }) => {
         />
       </div>
       <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM_BUTTONS_SECTION}>
-        <Button clickHandler={resetButtonClickHandler} text={'reset'} />
-        <Button clickHandler={subminButtonClickHandler} text={'submit'} />
+        <Button text={'reset'} />
+        <Button text={'submit'} />
       </div>
     </form>
   );

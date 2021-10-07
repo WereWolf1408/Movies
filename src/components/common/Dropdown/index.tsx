@@ -47,7 +47,12 @@ const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
     const changedArr = modifyArr();
     //ask about time to update state!!! there is some delay when you update state. how to handle case when you need new state immediately
     setOptionsHolder(changedArr);
-    setSelected(changedArr.toString());
+    //another question the following: is it ok to call below method inside useEffect() ?
+    //i have some concerns is it ok 
+    //to divide useState functions, i mean some 
+    //of them called inside functions like event 
+    //handles and another common functionality move inside useEffect
+    //setSelected(changedArr.toString());
     callback && callback(changedArr);
   };
 
