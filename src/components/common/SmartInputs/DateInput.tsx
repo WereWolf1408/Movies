@@ -30,7 +30,7 @@ export const DateInput: DateInputProps = ({
         min="2018-01-01"
         max="2018-12-31"
         onChange={changeHandler}
-      ></input>
+      />
     </div>
   );
 };
