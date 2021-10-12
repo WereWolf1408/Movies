@@ -1,6 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { App } from './App';
 import { ContextApp } from './ContextApp';
+import ErrorBoundary from './components/containers/ErrorBoundary';
 
-ReactDOM.render(<ContextApp />, document.getElementById('app'));
+ReactDOM.render(
+  <ErrorBoundary>
+    <ContextApp />
+  </ErrorBoundary>,
+  document.getElementById('app')
+);

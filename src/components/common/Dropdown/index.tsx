@@ -39,7 +39,7 @@ const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
     const modifyArr = (): Array<string> => {
       if (checked) {
         optionsHolder.push(option);
-        return optionsHolder;
+        return [...optionsHolder];
       }
       const filteredArr = optionsHolder.filter((value) => value !== option);
       return filteredArr;
@@ -53,6 +53,7 @@ const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
     //of them called inside functions like event 
     //handles and another common functionality move inside useEffect
     //setSelected(changedArr.toString());
+    setSelected(changedArr.toString());
     callback && callback(changedArr);
   };
 
