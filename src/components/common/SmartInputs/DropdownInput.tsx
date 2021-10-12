@@ -1,5 +1,5 @@
 import React from 'react';
-import Dropdown from '../Dropdown';
+import {Dropdown} from '../Dropdown/Dropdown';
 import { SmartInputProps } from './interfaces';
 
 interface SmartInputExtProps extends SmartInputProps {

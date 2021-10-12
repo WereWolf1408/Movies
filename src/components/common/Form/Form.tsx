@@ -1,13 +1,16 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
+import { Path, useForm, UseFormRegister, SubmitHandler } from 'react-hook-form';
+import { InputFormProps } from '@utils/interfaces';
 import {
   DateInput,
-  InputWithLabel,
+  LabelWrapper,
   DropdownInput,
   TextAreaWithLabel,
 } from '../SmartInputs';
-import Button from '../Button';
+import { Button } from '../Button/Button';
+import { Input } from '../Input';
 
-import './style.less';
+import './Form.less';
 
 const CLASSES = {
   NETFLIX_APP_MODAL_WINDOW_FORM: 'netflix-app__modal-window-form',
@@ -35,7 +38,17 @@ interface FormProps {
   }): JSX.Element;
 }
 
-const Form: FormProps = ({ titleValue = '', yearValue = 2000, genreValue = '' }) => {
+export const Form: FormProps = ({
+  titleValue = '',
+  yearValue = 2000,
+  genreValue = '',
+}) => {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
   const [title, setTitle] = useState(titleValue);
   const [movieURL, setMovieURL] = useState('');
   const [genre, setGenre] = useState([genreValue]);
@@ -75,74 +88,63 @@ const Form: FormProps = ({ titleValue = '', yearValue = 2000, genreValue = '' })
 
   const overviewChangeHandler = (event: React.FormEvent<HTMLTextAreaElement>) => {};
 
-  const subminButtonClickHandler = () => {
-    // submitClickHandler({
-    //   title,
-    //   movieURL,
-    //   genre,
-    //   releaseDate,
-    //   rating,
-    //   runTime,
-    // });
+  const onSubmit: SubmitHandler<InputFormProps> = (data) => {
+    console.log(data);
   };
 
   return (
-    <form className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM}>
+    <form
+      className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM_INPUT_SECTION}>
-        <InputWithLabel
-          changeHandler={titleChangeHandler}
-          placeholder={'1123'}
-          labelText={'Title'}
-          value={title}
+        <LabelWrapper classes={CLASSES.NETFLIX_APP__INPUT_BLOCK} labelText={'title'}>
+          <Input placeHolder={'Title'} register={register} label={'title'} />
+        </LabelWrapper>
+        <LabelWrapper
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <InputWithLabel
-          changeHandler={movieURLChangeHandler}
-          placeholder={'movie url'}
           labelText={'movie url'}
-          value={movieURL}
-          classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <DropdownInput
+        >
+          <Input placeHolder={'movie url'} register={register} label={'movie url'} />
+        </LabelWrapper>
+        {/* <DropdownInput
           labelText={'genre'}
           options={['comedy', 'horor', 'crime']}
           changeHandler={genreChangeHandler}
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <DateInput
+        /> */}
+        {/* <DateInput
           labelText={'release date'}
           changeHandler={releaseDateChangeHandler}
           value={releaseDate}
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <InputWithLabel
+        /> */}
+        {/* <InputWithLabel
           changeHandler={ratingChangeHandler}
           placeholder={'1123'}
           labelText={'rating'}
           value={rating.toString()}
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <InputWithLabel
+        /> */}
+        {/* <InputWithLabel
           changeHandler={runTimeChangeHandler}
           placeholder={'runtime'}
           labelText={'runtime'}
           value={runTime}
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
-        <TextAreaWithLabel
+        /> */}
+        {/* <TextAreaWithLabel
           changeHandler={overviewChangeHandler}
           placeholder={'Movie description'}
           labelText={'runtime'}
           value={runTime}
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        />
+        /> */}
       </div>
       <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM_BUTTONS_SECTION}>
         <Button text={'reset'} />
-        <Button text={'submit'} />
+        <Button text={'submit'} submit />
       </div>
     </form>
   );
 };
-
-export default Form;

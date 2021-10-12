@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import Dropdown from '../../common/Dropdown';
+import {Dropdown} from '../../common/Dropdown';
 import { sortOptions } from '@utils/utils';
 
-import './style.less';
+import './BreadCrumb.less';
 
 const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];
 
@@ -23,7 +23,7 @@ type BreadCrumbItemProps = (props: {
   isActive: boolean;
 }) => JSX.Element;
 
-const BreadCrumbItem: BreadCrumbItemProps = ({
+export const BreadCrumbItem: BreadCrumbItemProps = ({
   genre,
   clickHandler,
   activeId,
@@ -67,5 +67,3 @@ export const BreadCrumb = () => {
     </section>
   );
 };
-
-export default BreadCrumb;

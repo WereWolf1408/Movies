@@ -1,8 +1,10 @@
 import React from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+import { InputFormProps } from '@utils/interfaces';
 
 const classnames = require('classnames');
 
-import './style.less';
+import './Input.less';
 
 const CLASSES = {
   NETFLIX_INPUT: 'netflix-app__input',
@@ -10,20 +12,30 @@ const CLASSES = {
 
 interface InputProps {
   (props: {
-    changeHandler: (event: React.FormEvent<HTMLInputElement>) => void;
+    changeHandler?: (event: React.FormEvent<HTMLInputElement>) => void;
     placeHolder?: string;
     classes?: string;
     value?: string;
+    label?: Path<InputFormProps>;
+    register?: UseFormRegister<InputFormProps>;
   }): JSX.Element;
 }
 
-const Input: InputProps = ({
+export const Input: InputProps = ({
   placeHolder = 'What do you want to watch?',
   classes,
   changeHandler,
   value,
+  label,
+  register,
 }) => {
-  return (
+  return register ? (
+    <input
+      className={classnames(CLASSES.NETFLIX_INPUT, classes)}
+      placeholder={placeHolder}
+      {...register(label)}
+    />
+  ) : (
     <input
       className={classnames(CLASSES.NETFLIX_INPUT, classes)}
       placeholder={placeHolder}
@@ -32,5 +44,3 @@ const Input: InputProps = ({
     />
   );
 };
-
-export default Input;

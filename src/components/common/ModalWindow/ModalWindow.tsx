@@ -1,8 +1,8 @@
 import React, { useContext } from 'react';
 import { CloseIcon } from '@utils/utils';
 
-import './style.less';
-import { NetflixAppContext } from '../../../Context';
+import './ModalWindow.less';
+import { NetflixAppContext } from '../../../Context/Context';
 
 const CLASSES = {
   NETFLIX_APP_MODAL_WINDOW: 'netflix-app__modal-window',
@@ -16,7 +16,7 @@ interface ModalWindowProps {
   (props: { children: React.ReactNode; title: string }): JSX.Element;
 }
 
-const ModalWindow: ModalWindowProps = ({ children, title }) => {
+export const ModalWindow: ModalWindowProps = ({ children, title }) => {
   const { closeAllModals } = useContext(NetflixAppContext);
 
   return (
@@ -32,5 +32,3 @@ const ModalWindow: ModalWindowProps = ({ children, title }) => {
     </div>
   );
 };
-
-export default ModalWindow;

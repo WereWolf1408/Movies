@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
-import { NetflixAppContext } from '../../../Context';
-import Button from '../../common/Button';
-import Form from '../../common/Form';
-import ModalWindow from '../../common/ModalWindow';
+import { NetflixAppContext } from '../../../Context/Context';
+import {Button} from '../../common/Button/Button';
+import {Form} from '../../common/Form';
+import {ModalWindow} from '../../common/ModalWindow/ModalWindow';
 
-import './style.less';
+import './EditMovieModal.less';
 
 const CLASSES = {
   NETFLIX_APP_EDIT_MODAL: 'netflix-app__edit-movie',
 };
 
-const DeleteMovieModal = () => {
+export const EditMovieModal = () => {
   const { movieDetail } = useContext(NetflixAppContext);
   return (
     <ModalWindow title={'Edit Movie'}>
@@ -20,5 +20,3 @@ const DeleteMovieModal = () => {
     </ModalWindow>
   );
 };
-
-export default DeleteMovieModal;

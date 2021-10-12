@@ -1,0 +1,1 @@
+export { MovieBody } from './MovieBody';

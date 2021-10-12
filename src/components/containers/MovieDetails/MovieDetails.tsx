@@ -1,8 +1,8 @@
 import React, { useContext, useEffect } from 'react';
-import { NetflixAppContext } from '../../../Context';
+import { NetflixAppContext } from '../../../Context/Context';
 import { Logo, SearchButton } from '@utils/utils';
 
-import './style.less';
+import './MovieDetails.less';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE_DETAILS: 'netflix-app__movie-details',

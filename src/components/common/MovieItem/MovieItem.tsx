@@ -2,9 +2,9 @@ import React, { useContext, useEffect, useState } from 'react';
 import { SingleMovieProps } from '@utils/interfaces';
 import { ToolsIcon } from '@utils/utils';
 
-import './style.less';
+import './MovieItem.less';
 import { CloseIcon } from '../../../utils/utils';
-import { NetflixAppContext } from '../../../Context';
+import { NetflixAppContext } from '../../../Context/Context';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE: 'netflix-app__movie',
@@ -21,7 +21,7 @@ interface MovieItemProps {
   (props: { item: SingleMovieProps }): JSX.Element;
 }
 
-const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } }) => {
+export const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } }) => {
   //is it ok to use Context here!?
   const { movieDetail, showDetails, showEditMoviePopup } = useContext(NetflixAppContext);
   const [showToolsOption, setShowToolsOption] = useState(false);
@@ -85,5 +85,3 @@ const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } }) => {
     </div>
   );
 };
-
-export default MovieItem;

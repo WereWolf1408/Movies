@@ -1,6 +1,6 @@
 import React from 'react';
-import ModalWindow from '@common/ModalWindow';
-import Form from '@common/Form';
+import { ModalWindow } from '@common/ModalWindow';
+import { Form } from '@common/Form';
 import { formDataReceived } from '@utils/interfaces';
 
 const CLASSES = {
@@ -14,10 +14,7 @@ interface FormModalProps {
   }): JSX.Element;
 }
 
-const FormModal: FormModalProps = ({
-  resetClickHandler,
-  sendButtonClick,
-}) => {
+export const FormModal: FormModalProps = ({ resetClickHandler, sendButtonClick }) => {
   return (
     <ModalWindow title={'add movie'}>
       <Form
@@ -27,5 +24,3 @@ const FormModal: FormModalProps = ({
     </ModalWindow>
   );
 };
-
-export default FormModal;

@@ -1,11 +1,11 @@
 import React from 'react';
 
-import './style.less';
+import './HandleLoading.less';
 
 type CallbackProps = { isLoading?: boolean; props?: unknown };
 
 //<T,> - this is a feature of TS laguage; another way to handle it is <T extends {}>
-const HandleLoading = <T,>(Component: Function) => {
+export const HandleLoading = <T,>(Component: Function) => {
   const Loading = () => (
     <div>
       <h1>Loading....</h1>
@@ -25,5 +25,3 @@ const HandleLoading = <T,>(Component: Function) => {
     return <Component {...props} />;
   };
 };
-
-export default HandleLoading;

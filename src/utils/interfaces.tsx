@@ -54,3 +54,8 @@ export interface NetflixAppContextProps {
   showEditMoviePopup: ShowEditMoviePopupProps;
   closeAllModals: () => void;
 }
+
+export interface InputFormProps {
+  title: string;
+  'movie url': string;
+}

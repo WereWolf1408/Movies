@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { DropdownCallbackProps } from '@utils/interfaces';
 
-import './style.less';
+import './Dropdown.less';
 import classNames from 'classnames';
 
 const CLASSES = {
@@ -20,7 +20,7 @@ interface DropdownProps {
   }): JSX.Element;
 }
 
-const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
+export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([options[0]]);
@@ -116,5 +116,3 @@ const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
     </div>
   );
 };
-
-export default Dropdown;
