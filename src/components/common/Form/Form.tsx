@@ -1,5 +1,5 @@
-import React, { Dispatch, SetStateAction, useState } from 'react';
-import { Path, useForm, UseFormRegister, SubmitHandler } from 'react-hook-form';
+import React from 'react';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { InputFormProps } from '@utils/interfaces';
 import { LabelWrapper } from '../LabelWrapper';
 import { Button } from '../Button/Button';
@@ -20,13 +20,6 @@ const CLASSES = {
     'netflix-app__modal-window-form-buttons-section',
 };
 
-type FormEvent = React.FormEvent<HTMLInputElement>;
-
-type SetFormFieldProps = (
-  event: React.FormEvent<HTMLInputElement>,
-  callback: Dispatch<SetStateAction<string>>
-) => void;
-
 interface FormProps {
   (props: {
     titleValue?: string;
@@ -35,11 +28,7 @@ interface FormProps {
   }): JSX.Element;
 }
 
-export const Form: FormProps = ({
-  titleValue = '',
-  yearValue = 2000,
-  genreValue = '',
-}) => {
+export const Form: FormProps = () => {
   const {
     register,
     handleSubmit,
@@ -94,6 +83,19 @@ export const Form: FormProps = ({
           labelText={'runtime'}
         >
           <Input placeHolder={'runtime'} register={register} label={'runtime'} />
+        </LabelWrapper>
+
+        <LabelWrapper
+          classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
+          labelText={'Movie description'}
+        >
+          <textarea
+            name=""
+            id=""
+            cols={30}
+            rows={10}
+            placeholder={'Movie description'}
+          />
         </LabelWrapper>
       </div>
       <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM_BUTTONS_SECTION}>

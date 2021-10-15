@@ -39,7 +39,7 @@ export const NetflixAppContextFunction = ({
 
   const [showAddMovieModal, setShowAddMovieModal] = useState<ShowAddMovieModalProps>(
     {
-      value: true,
+      value: false,
       handler: showAddMovieModalHandler,
     }
   );
