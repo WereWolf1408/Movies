@@ -1,16 +1,13 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Path, useForm, UseFormRegister, SubmitHandler } from 'react-hook-form';
 import { InputFormProps } from '@utils/interfaces';
-import {
-  DateInput,
-  LabelWrapper,
-  DropdownInput,
-  TextAreaWithLabel,
-} from '../SmartInputs';
+import { LabelWrapper, DropdownInput, TextAreaWithLabel } from '../SmartInputs';
 import { Button } from '../Button/Button';
 import { Input } from '../Input';
+import { DateInput } from '../DateInput';
 
 import './Form.less';
+import { Dropdown } from '../Dropdown/Dropdown';
 
 const CLASSES = {
   NETFLIX_APP_MODAL_WINDOW_FORM: 'netflix-app__modal-window-form',
@@ -49,44 +46,6 @@ export const Form: FormProps = ({
     watch,
     formState: { errors },
   } = useForm();
-  const [title, setTitle] = useState(titleValue);
-  const [movieURL, setMovieURL] = useState('');
-  const [genre, setGenre] = useState([genreValue]);
-  const [releaseDate, setReleaseDate] = useState('');
-  const [rating, setRating] = useState<number>(0);
-  const [runTime, setRunTime] = useState('');
-
-  const setFormField: SetFormFieldProps = (event, callback) => {
-    const { value } = event.currentTarget;
-    callback(value);
-  };
-
-  const titleChangeHandler = (event: FormEvent) => {
-    setFormField(event, setTitle);
-  };
-
-  const movieURLChangeHandler = (event: FormEvent) => {
-    setFormField(event, setMovieURL);
-  };
-
-  const genreChangeHandler = (value: Array<string>) => {
-    setGenre(value);
-  };
-
-  const releaseDateChangeHandler = (event: FormEvent) => {
-    setFormField(event, setReleaseDate);
-  };
-
-  const ratingChangeHandler = (event: FormEvent) => {
-    const { value } = event.currentTarget;
-    setRating(parseInt(value));
-  };
-
-  const runTimeChangeHandler = (event: FormEvent) => {
-    setFormField(event, setRunTime);
-  };
-
-  const overviewChangeHandler = (event: React.FormEvent<HTMLTextAreaElement>) => {};
 
   const onSubmit: SubmitHandler<InputFormProps> = (data) => {
     console.log(data);
@@ -107,39 +66,35 @@ export const Form: FormProps = ({
         >
           <Input placeHolder={'movie url'} register={register} label={'movie url'} />
         </LabelWrapper>
-        {/* <DropdownInput
-          labelText={'genre'}
-          options={['comedy', 'horor', 'crime']}
-          changeHandler={genreChangeHandler}
+        <LabelWrapper classes={CLASSES.NETFLIX_APP__INPUT_BLOCK} labelText={'genre'}>
+          <Dropdown
+            options={['comedy', 'horor', 'crime']}
+            dropdownType={'multiline'}
+            label={'genre'}
+            register={register}
+          />
+        </LabelWrapper>
+
+        <LabelWrapper
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        /> */}
-        {/* <DateInput
           labelText={'release date'}
-          changeHandler={releaseDateChangeHandler}
-          value={releaseDate}
+        >
+          <DateInput label={'release date'} register={register} />
+        </LabelWrapper>
+
+        <LabelWrapper
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        /> */}
-        {/* <InputWithLabel
-          changeHandler={ratingChangeHandler}
-          placeholder={'1123'}
           labelText={'rating'}
-          value={rating.toString()}
+        >
+          <Input placeHolder={'Rating'} register={register} label={'rating'} />
+        </LabelWrapper>
+
+        <LabelWrapper
           classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        /> */}
-        {/* <InputWithLabel
-          changeHandler={runTimeChangeHandler}
-          placeholder={'runtime'}
           labelText={'runtime'}
-          value={runTime}
-          classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        /> */}
-        {/* <TextAreaWithLabel
-          changeHandler={overviewChangeHandler}
-          placeholder={'Movie description'}
-          labelText={'runtime'}
-          value={runTime}
-          classes={CLASSES.NETFLIX_APP__INPUT_BLOCK}
-        /> */}
+        >
+          <Input placeHolder={'runtime'} register={register} label={'runtime'} />
+        </LabelWrapper>
       </div>
       <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW_FORM_BUTTONS_SECTION}>
         <Button text={'reset'} />

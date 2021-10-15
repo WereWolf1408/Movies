@@ -58,4 +58,8 @@ export interface NetflixAppContextProps {
 export interface InputFormProps {
   title: string;
   'movie url': string;
+  genre: string;
+  'release date': string;
+  rating: string;
+  runtime: string;
 }
