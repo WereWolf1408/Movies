@@ -2,7 +2,7 @@
   "name": "netflix-shadow-copy",
   "version": "1.0.0",
   "description": "webpack for netflix application",
-  "main": "index.js",
+  "main": "index.tsx",
   "scripts": {
     "start": "webpack serve --open --env NODE_ENV=dev",
     "build": "webpack --mode production",

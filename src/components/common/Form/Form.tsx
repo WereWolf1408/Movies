@@ -1,7 +1,7 @@
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { Path, useForm, UseFormRegister, SubmitHandler } from 'react-hook-form';
 import { InputFormProps } from '@utils/interfaces';
-import { LabelWrapper, DropdownInput, TextAreaWithLabel } from '../SmartInputs';
+import { LabelWrapper } from '../LabelWrapper';
 import { Button } from '../Button/Button';
 import { Input } from '../Input';
 import { DateInput } from '../DateInput';

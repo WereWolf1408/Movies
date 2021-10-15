@@ -77,11 +77,6 @@ export const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } })
         alt=""
         onClick={imageClickHandler}
       />
-      <div className={CLASSES.NETFLIX_APP_MOVIE_YEAR_NAME}>
-        <span>{title}</span>
-        <span>{year}</span>
-      </div>
-      <span className={CLASSES.NETFLIX_APP_MOVIE_GENRE}>{genre}</span>
     </div>
   );
 };
