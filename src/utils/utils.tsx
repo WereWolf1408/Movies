@@ -182,5 +182,6 @@ export const buildSearchURL = (searchQuery: SearchQueryProps) => {
     : 'search=';
   const genrePartURL = genre ? `&searchBy=genres&filter=${genre}` : '';
   const sortByPartURL = sortBy ? `&sortBy=${sortBy}` : '';
+  // console.log(`${queryPartURL}${genrePartURL}`);
   return `${queryPartURL}${genrePartURL}${sortByPartURL}`;
 };

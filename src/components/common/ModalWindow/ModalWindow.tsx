@@ -1,6 +1,6 @@
 import React from 'react';
-import { CloseIcon } from '../../../utils/utils';
-import { closeAllModals } from '../../../Redux/reducers/modalWindowsReducer';
+import { CloseIcon } from '@utils/utils';
+import { closeAllModals } from '../../../store/rootReducer';
 
 import './ModalWindow.less';
 import { useDispatch } from 'react-redux';
@@ -19,9 +19,9 @@ interface ModalWindowProps {
 
 export const ModalWindow: ModalWindowProps = ({ children, title }) => {
   const dispatch = useDispatch();
-
+ 
   const closeIconClickHandler = () => {
-    dispatch(closeAllModals());
+    dispatch(closeAllModals())
   };
 
   return (

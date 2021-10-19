@@ -8,11 +8,11 @@ import { EditMovieModal } from './components/containers/EditMovieModal';
 import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
 import { MovieDetails } from './components/containers/MovieDetails';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './Redux/store';
-import { getData, searchMovie } from './Redux/ajaxActions';
-import { showIdleSpinner, setQueryParams } from './Redux/reducers/moviesReducer';
+import { RootState } from './store/store';
+import { getData, searchMovie } from './store/ajaxActions';
+import { showIdleSpinner, setQueryParams } from './store/rootReducer';
 import { ErrorModal } from './components/containers/ErrorModal';
-import { useLocation, useSearchParams } from 'react-router-dom';
+import { useLocation, useParams, useSearchParams } from 'react-router-dom';
 
 import './App.less';
 
@@ -33,12 +33,12 @@ export const App = () => {
   const sortBy = searchParams.get('sortBy');
   const state = useSelector((state: RootState) => {
     return {
-      showAddMovieModal: state.modalWindows.showAddMovieModal,
-      errorMessage: state.movies.errorMessage,
-      showError: state.movies.showError,
-      showEditMovieModal: state.modalWindows.showEditMovieModal,
+      showAddMovieModal: state.mainStore.showAddMovieModal,
+      errorMessage: state.mainStore.errorMessage,
+      showError: state.mainStore.showError,
+      showEditMovieModal: state.mainStore.showEditMovieModal,
       showMovieDetails: state.additionalStore.showMovieDetails,
-      isLoading: state.movies.isLoading,
+      isLoading: state.mainStore.isLoading,
     };
   });
   const dispatch = useDispatch();

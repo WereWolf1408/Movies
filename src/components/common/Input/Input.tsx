@@ -1,5 +1,5 @@
 import React from 'react';
-import { UseFormRegister, Path } from 'react-hook-form';
+import { UseFormRegister, Path, FieldErrors } from 'react-hook-form';
 import {
   InputFormProps,
   ValidationFormOptionsProps,
@@ -36,16 +36,21 @@ export const Input: InputProps = ({
   options,
   value,
 }) => {
-  const inputProps = {
-    className: classnames(CLASSES.NETFLIX_INPUT, classes),
-    placeholder: placeHolder,
-    ...(register ? register(label, options) : { onChange: changeHandler, value }),
-  };
-
-  return (
+  return register ? (
     <>
-      <input {...inputProps} />
+      <input
+        className={classnames(CLASSES.NETFLIX_INPUT, classes)}
+        placeholder={placeHolder}
+        {...register(label, options)}
+      />
       {errors && <span className={'netflix-app__input-error-label'}>{errors}</span>}
     </>
+  ) : (
+    <input
+      className={classnames(CLASSES.NETFLIX_INPUT, classes)}
+      placeholder={placeHolder}
+      onChange={changeHandler}
+      value={value}
+    />
   );
 };

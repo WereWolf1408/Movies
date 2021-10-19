@@ -1,10 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { DropdownCallbackProps, InputFormProps } from '../../../utils/interfaces';
-import { UseFormRegister, Path } from 'react-hook-form';
-import classNames from 'classnames';
-import { ValidationFormOptionsProps } from '../../../utils/interfaces';
+import {
+  UseFormRegister,
+  Path,
+  UseFormSetValue,
+  Validate,
+  FieldErrors,
+} from 'react-hook-form';
 
 import './Dropdown.less';
+import classNames from 'classnames';
+import { ValidationFormOptionsProps } from '../../../utils/interfaces';
 
 const CLASSES = {
   NETFLIX_APP_DROPDOWN: 'netflix-app__dropdown',
@@ -88,7 +94,6 @@ export const Dropdown: DropdownProps = ({
           {...register(label, validationOptions)}
           onClick={selectedOptionClickHandler}
           value={selected}
-          placeholder={'select value'}
         />
         {errors && (
           <span className={'netflix-app__input-error-label'}>

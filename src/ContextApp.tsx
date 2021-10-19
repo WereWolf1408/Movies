@@ -1,15 +1,19 @@
 import React from 'react';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
-import { store } from './Redux/store';
+import { NetflixAppContextFunction } from './Context';
+import { store } from './store/store';
 import { Routers } from './Routers';
+import { App } from './App';
 
 export const ContextApp = () => {
   return (
     <Provider store={store}>
-      <BrowserRouter>
-        <Routers />
-      </BrowserRouter>
+      <NetflixAppContextFunction>
+        <BrowserRouter>
+          <Routers />
+        </BrowserRouter>
+      </NetflixAppContextFunction>
     </Provider>
   );
 };
