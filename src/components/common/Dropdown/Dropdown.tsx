@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DropdownCallbackProps, InputFormProps } from '@utils/interfaces';
-import { UseFormRegister, Path } from 'react-hook-form';
+import { UseFormRegister, Path, UseFormSetValue } from 'react-hook-form';
 
 import './Dropdown.less';
 import classNames from 'classnames';
@@ -20,6 +20,7 @@ interface DropdownProps {
     dropdownType: 'simple' | 'multiline';
     label?: Path<InputFormProps>;
     register?: UseFormRegister<InputFormProps>;
+    setValue?: UseFormSetValue<InputFormProps>;
   }): JSX.Element;
 }
 
@@ -28,6 +29,7 @@ export const Dropdown: DropdownProps = ({
   options,
   dropdownType,
   register,
+  setValue,
   label,
 }) => {
   const [selected, setSelected] = useState<string>(options[0]);
@@ -54,16 +56,10 @@ export const Dropdown: DropdownProps = ({
       return filteredArr;
     };
     const changedArr = modifyArr();
-    //ask about time to update state!!! there is some delay when you update state. how to handle case when you need new state immediately
-    //another question the following: is it ok to call below method inside useEffect() ?
-    //i have some concerns is it ok
-    //to divide useState functions, i mean some
-    //of them called inside functions like event
-    //handles and another common functionality move inside useEffect
-    //setSelected(changedArr.toString());
     setOptionsHolder(changedArr);
     setSelected(changedArr.toString());
     callback && callback(changedArr);
+    setValue && setValue(label, optionsHolder.toString());
   };
 
   const selectedOptionClickHandler = () => {
