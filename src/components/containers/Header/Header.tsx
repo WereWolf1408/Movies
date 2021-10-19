@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React, { useEffect, useState } from 'react';
 import { Button } from '../../common/Button';
 import { Input } from '../../common/Input';
@@ -6,6 +7,17 @@ import { showAddMovieModal } from '../../../Redux/reducers/modalWindowsReducer';
 import { searchMovie } from '../../../Redux/ajaxActions';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../Redux/store';
+=======
+import React, { useContext, useEffect, useState } from 'react';
+import { Button } from '../../common/Button';
+import { Input } from '../../common/Input';
+import { Logo } from '../../../utils/utils';
+import BackgroundImage from '@assets/header_background.jpg';
+import { showAddMovieModal } from '../../../store/rootReducer';
+import { searchMovie } from '../../../store/ajaxActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
+>>>>>>> d07ec72 (Task 8: Add React Router to the application)
 import { useSearchParams } from 'react-router-dom';
 
 import './Header.less';
@@ -27,7 +39,11 @@ interface HeaderProps {
 
 export const Header: HeaderProps = ({ title }) => {
   const state = useSelector((state: RootState) => ({
+<<<<<<< HEAD
     searchParams: state.movies.searchParams,
+=======
+    searchParams: state.mainStore.searchParams,
+>>>>>>> d07ec72 (Task 8: Add React Router to the application)
   }));
   let [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();

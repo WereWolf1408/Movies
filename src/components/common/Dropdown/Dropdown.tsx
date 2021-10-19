@@ -19,11 +19,18 @@ interface DropdownProps {
     options: Array<string>;
     dropdownType: 'simple' | 'multiline';
     label?: Path<InputFormProps>;
+<<<<<<< HEAD
     validationOptions?: ValidationFormOptionsProps;
     errors?: string;
     selectedValue?: string;
     callback?: DropdownCallbackProps;
     register?: UseFormRegister<InputFormProps>;
+=======
+    register?: UseFormRegister<InputFormProps>;
+    validationOptions?: ValidationFormOptionsProps;
+    errors?: string;
+    selectedValue?: string;
+>>>>>>> d07ec72 (Task 8: Add React Router to the application)
   }): JSX.Element;
 }
 

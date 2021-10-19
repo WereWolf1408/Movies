@@ -4,9 +4,15 @@ import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '../../../utils/utils';
 import './BreadCrumb.less';
 import { useDispatch, useSelector } from 'react-redux';
+<<<<<<< HEAD
 import { sortDataByOption } from '../../../Redux/ajaxActions';
 import { setQueryParams } from '../../../Redux/reducers/moviesReducer';
 import { RootState } from '../../../Redux/store';
+=======
+import { sortDataByOption } from '../../../store/ajaxActions';
+import { setQueryParams } from '../../../store/rootReducer';
+import { RootState } from '../../../store/store';
+>>>>>>> d07ec72 (Task 8: Add React Router to the application)
 
 const CLASSES = {
   NETFLIX_APP_BREADCRUMB: 'netflix-app__breadcrumb',
@@ -44,7 +50,11 @@ export const BreadCrumb = () => {
   const {
     searchParams: { genre: stateGenre, query, sortBy },
   } = useSelector((state: RootState) => ({
+<<<<<<< HEAD
     searchParams: state.movies.searchParams,
+=======
+    searchParams: state.mainStore.searchParams,
+>>>>>>> d07ec72 (Task 8: Add React Router to the application)
   }));
   const dispatch = useDispatch();
 
