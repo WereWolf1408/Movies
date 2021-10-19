@@ -1,5 +1,5 @@
 import React from 'react';
-import { UseFormRegister, Path, FieldErrors } from 'react-hook-form';
+import { UseFormRegister, Path } from 'react-hook-form';
 import {
   InputFormProps,
   ValidationFormOptionsProps,
@@ -32,11 +32,7 @@ export const DateInput: DateInputPorps = ({ label, register, options, errors }) 
         max="2018-12-31"
         {...register(label, options)}
       />
-      {errors && (
-        <span className={'netflix-app__input-error-label'}>
-          {errors}
-        </span>
-      )}
+      {errors && <span className={'netflix-app__input-error-label'}>{errors}</span>}
     </>
   );
 };

@@ -1,12 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { rootReducer } from './rootReducer';
-import { additionalReducer } from './additionalReducer';
+import movies from './reducers/moviesReducer';
+import modalWindows from './reducers/modalWindowsReducer';
+import additionalStore from './reducers/additionalReducer';
 
 export const store = configureStore({
   reducer: {
-    mainStore: rootReducer,
-    additionalStore: additionalReducer,
+    movies,
+    additionalStore,
+    modalWindows,
   },
 });
 

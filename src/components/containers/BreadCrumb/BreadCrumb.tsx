@@ -1,10 +1,12 @@
 import classNames from 'classnames';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Dropdown } from '../../common/Dropdown';
-import { sortOptions, genres } from '@utils/utils';
+import { sortOptions, genres } from '../../../utils/utils';
 import './BreadCrumb.less';
-import { useDispatch } from 'react-redux';
-import { sortDataByOption } from '../../../store/ajaxActions';
+import { useDispatch, useSelector } from 'react-redux';
+import { sortDataByOption } from '../../../Redux/ajaxActions';
+import { setQueryParams } from '../../../Redux/reducers/moviesReducer';
+import { RootState } from '../../../Redux/store';
 
 const CLASSES = {
   NETFLIX_APP_BREADCRUMB: 'netflix-app__breadcrumb',
@@ -39,16 +41,25 @@ export const BreadCrumbItem: BreadCrumbItemProps = ({
 );
 
 export const BreadCrumb = () => {
+  const {
+    searchParams: { genre: stateGenre, query, sortBy },
+  } = useSelector((state: RootState) => ({
+    searchParams: state.movies.searchParams,
+  }));
   const dispatch = useDispatch();
-  const [activeItem, setActiveItem] = useState(0);
 
-  const clickHandler = (activeId: number) => {
-    setActiveItem(activeId);
+  const clickHandler = (genre: string) => {
+    dispatch(
+      setQueryParams({
+        genre,
+        query,
+        sortBy,
+      })
+    );
   };
 
-  const dropdownChangeHandler = (value: string) => {
-    console.log(`dropdown change hnadler`);
-    dispatch(sortDataByOption(value));
+  const dropdownChangeHandler = (value: string | Array<string>) => {
+    dispatch(sortDataByOption(value as string));
   };
 
   return (
@@ -58,9 +69,9 @@ export const BreadCrumb = () => {
           <BreadCrumbItem
             key={index}
             genre={genre}
-            clickHandler={clickHandler}
+            clickHandler={() => clickHandler(genre)}
             activeId={index}
-            isActive={activeItem === index}
+            isActive={genre === (stateGenre || 'all')}
           />
         ))}
       </div>
@@ -70,6 +81,7 @@ export const BreadCrumb = () => {
           options={sortOptions}
           dropdownType={'simple'}
           callback={dropdownChangeHandler}
+          selectedValue={sortBy}
         />
       </div>
     </section>

@@ -1,7 +1,6 @@
-import React from 'react';
-import { additionalInitialState } from './initialState';
+import { additionalInitialState } from '../initialState';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { MovieItemProps } from '../utils/interfaces';
+import { MovieItemProps } from '../../utils/interfaces';
 
 const additionalSlicer = createSlice({
   name: 'popup',
@@ -13,9 +12,9 @@ const additionalSlicer = createSlice({
     },
     closeMovieDetails: (state) => {
       state.showMovieDetails = false;
-    }
+    },
   },
 });
 
 export const { setSetectedMovie, closeMovieDetails } = additionalSlicer.actions;
-export const additionalReducer = additionalSlicer.reducer;
+export default additionalSlicer.reducer;

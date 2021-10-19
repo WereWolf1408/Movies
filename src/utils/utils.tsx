@@ -1,5 +1,5 @@
 import React from 'react';
-import { NetflixAppContextProps } from './interfaces';
+import { NetflixAppContextProps, SearchQueryProps } from './interfaces';
 
 export const defaultContextValue: NetflixAppContextProps = {
   showAddMovieModal: {
@@ -108,6 +108,7 @@ export const ToolsIcon: ToolsIconProps = ({
     viewBox="0 0 44 44"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    role={'tools'}
   >
     <g filter="url(#filter0_d)">
       <circle cx="22" cy="22" r="18" fill="#2A202D" />
@@ -170,4 +171,16 @@ export const mockMoview = {
   revenue: 445435700,
   runtime: 128,
   genres: ['Comedy', 'Drama', 'Romance'],
+};
+
+export const buildSearchURL = (searchQuery: SearchQueryProps) => {
+  const { genre, query, sortBy } = searchQuery;
+  const queryPartURL = query
+    ? `search=${query}&searchBy=title`
+    : genre
+    ? ''
+    : 'search=';
+  const genrePartURL = genre ? `&searchBy=genres&filter=${genre}` : '';
+  const sortByPartURL = sortBy ? `&sortBy=${sortBy}` : '';
+  return `${queryPartURL}${genrePartURL}${sortByPartURL}`;
 };

@@ -16,7 +16,12 @@ interface ButtonProps {
   }): JSX.Element;
 }
 
-export const Button: ButtonProps = ({ text, classes, clickHandler = null, submit }) => {
+export const Button: ButtonProps = ({
+  text,
+  classes,
+  clickHandler = null,
+  submit,
+}) => {
   return submit ? (
     <input
       type="submit"

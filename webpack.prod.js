@@ -1,7 +1,5 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
+  entry: './src/index.prod.tsx',
   mode: 'production',
   devtool: 'source-map',
 };
