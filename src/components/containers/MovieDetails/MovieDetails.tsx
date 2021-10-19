@@ -3,6 +3,8 @@ import { NetflixAppContext } from '../../../Context/Context';
 import { Logo, SearchButton } from '@utils/utils';
 
 import './MovieDetails.less';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../../store/store';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE_DETAILS: 'netflix-app__movie-details',
@@ -24,7 +26,10 @@ const CLASSES = {
 };
 
 export const MovieDetails = () => {
-  const { movieDetail, showDetails } = useContext(NetflixAppContext);
+  const selectedMovie = useSelector((state: RootState) => {
+    return state.selectedMovie;
+  });
+  const { showDetails } = useContext(NetflixAppContext);
 
   return (
     <section className={CLASSES.NETFLIX_APP_MOVIE_DETAILS}>
@@ -33,35 +38,28 @@ export const MovieDetails = () => {
       </div>
       <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_BOTTOM_SECTION}>
         <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_IMAGE}>
-          <img src={movieDetail.props.imgUrl} alt="" />
+          <img src={selectedMovie.poster_path} alt="" />
         </div>
         <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_DETAILS_SECTION}>
           <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_TITLE_SECTION}>
             <h1 className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_TITLE}>
-              {movieDetail.props.title}
+              {selectedMovie.title}
             </h1>
-            <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_MARK}>8.9</span>
+            <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_MARK}>{selectedMovie.vote_average}</span>
           </div>
           <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_GENRE}>
-            {movieDetail.props.genre}
+            {selectedMovie.genres.toString()}
           </span>
           <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_YEAR_SECTION}>
             <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_YEAR}>
-              {movieDetail.props.year}
+              {selectedMovie.release_date}
             </span>
             <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_DURATION}>
-              2h 23m
+              {`${selectedMovie.runtime}min`}
             </span>
           </div>
           <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_DESCRIPTION}>
-            Jules Winnfield (Samuel L. Jackson) and Vincent Vega (John Travolta) are
-            two hit men who are out to retrieve a suitcase stolen from their
-            employer, mob boss Marsellus Wallace (Ving Rhames). Wallace has also
-            asked Vincent to take his wife Mia (Uma Thurman) out a few days later
-            when Wallace himself will be out of town. Butch Coolidge (Bruce Willis)
-            is an aging boxer who is paid by Wallace to lose his fight. The lives of
-            these seemingly unrelated people are woven together comprising of a
-            series of funny, bizarre and uncalled-for incidents.—Soumitra
+            {selectedMovie.overview}
           </span>
         </div>
       </div>

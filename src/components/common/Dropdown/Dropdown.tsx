@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { DropdownCallbackProps, InputFormProps } from '@utils/interfaces';
-import { UseFormRegister, Path } from 'react-hook-form';
+import { UseFormRegister, Path, UseFormSetValue } from 'react-hook-form';
 
 import './Dropdown.less';
 import classNames from 'classnames';
@@ -20,6 +20,7 @@ interface DropdownProps {
     dropdownType: 'simple' | 'multiline';
     label?: Path<InputFormProps>;
     register?: UseFormRegister<InputFormProps>;
+    setValue?: UseFormSetValue<InputFormProps>;
   }): JSX.Element;
 }
 
@@ -28,9 +29,10 @@ export const Dropdown: DropdownProps = ({
   options,
   dropdownType,
   register,
+  setValue,
   label,
 }) => {
-  const [selected, setSelected] = useState<string>(options[0]);
+  const [selected, setSelected] = useState<string>('select option');
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([options[0]]);
 
