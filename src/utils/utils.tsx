@@ -202,3 +202,6 @@ export const movies = [
 
 export const sortOptions = ['Title', 'Year', 'Genre'];
 export const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];
+export const actions = {
+  GET_DATA: 'GET_DATA',
+};

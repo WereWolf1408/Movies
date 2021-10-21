@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Header } from './components/containers/Header';
 import { HandleLoading } from './components/HOC/HandleLoading';
-import { ErrorBoundary } from './components/containers/ErrorBoundary';
 import { MovieBody } from './components/containers/MovieBody';
 import { Footer } from './components/containers/Footer';
 import { AddMovieModal } from './components/containers/AddMovieModal';
@@ -12,28 +11,33 @@ import { MovieDetails } from './components/containers/MovieDetails';
 
 import './App.less';
 
+const TestHOCFunction = HandleLoading<{ title: string }>(Header);
+const HEADER_TITLE = 'find your movie';
+
 const CLASSES = {
   NETFLIX_APP: 'netflix-app',
   NETFLIX_APP_LOGO: 'netflix-app__logo',
   NETFLIX_APP_FOOTER: 'netflix-app__footer',
 };
 
-const HEADER_TITLE = 'find your movie';
+interface AppProps {
+  (props: { store: Array<string>; fetchData: () => void }): JSX.Element;
+}
 
-const TestHOCFunction =
-  HandleLoading<{ title: string; addMovieClickHandler: () => void }>(Header);
-
-export const App = () => {
-  // i am not sure about place, where i called useContext; because in this case each
-  //Context change will cause re-render whole application
-  //but from the other hand React is quite smart and it's not a fact that react will be called re-render each time
+export const App: AppProps = (props) => {
+  const { store, fetchData } = props;
   const { showAddMovieModal, showDetails, showEditMoviePopup } =
     useContext(NetflixAppContext);
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
 
-  const addMovieButtonClickHandler = () => {
-    console.log('add movie button was clicked');
-  };
+  useEffect(() => {
+    console.log(`---> useEffect inside App Component`);
+    console.log(props);
+  });
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   return (
     <section className={CLASSES.NETFLIX_APP}>
@@ -42,7 +46,6 @@ export const App = () => {
         isLoading
         props={{
           title: 'test HOC Component',
-          addMovieClickHandler: addMovieButtonClickHandler,
         }}
       />
       <MovieBody />

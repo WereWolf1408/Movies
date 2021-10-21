@@ -46,8 +46,8 @@ export const MovieItem: MovieItemProps = ({ item: { src, title, year, genre } })
   };
 
   useEffect(() => {
-    console.log('movie detal props');
-    console.log(movieDetail);
+    // console.log('movie detal props');
+    // console.log(movieDetail);
   });
 
   return (

@@ -63,3 +63,15 @@ export interface InputFormProps {
   rating: string;
   runtime: string;
 }
+
+export interface StoreProps {
+  items: Array<string>;
+}
+
+export interface MapStateProps<K, G> {
+  (state: StoreProps, ownProps: K): G;
+}
+
+export interface MapDispatchProps<K, G> {
+  (dispatch: any, ownProps: K): G;
+}

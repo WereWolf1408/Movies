@@ -1,6 +1,7 @@
 import React from 'react';
-import { BreadCrumb } from '../BreadCrumb';
-import {MovieList} from '../MovieList/MovieList';
+// import { BreadCrumb } from '../BreadCrumb';
+import ConnectBreadCrumb from '../BreadCrumb/ConnectBreadCrumb';
+import { MovieList } from '../MovieList/MovieList';
 import { movies } from '@utils/utils';
 
 import './MovieBody.less';
@@ -14,7 +15,8 @@ const CLASSES = {
 export const MovieBody = () => {
   return (
     <section className={CLASSES.NETFLIX_APP_MOVIE_BODY}>
-      <BreadCrumb />
+      {/* <BreadCrumb /> */}
+      <ConnectBreadCrumb />
       <div className={CLASSES.NETFLIX_APP_MOVIE_BODY_SEARCH_RESULT}>
         <span>39 movies found</span>
       </div>

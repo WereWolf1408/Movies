@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '@utils/utils';
 import './BreadCrumb.less';
@@ -20,6 +20,10 @@ type BreadCrumbItemProps = (props: {
   isActive: boolean;
 }) => JSX.Element;
 
+interface BreadCrumbProps {
+  (props: { applySortCallback: () => void }): JSX.Element;
+}
+
 export const BreadCrumbItem: BreadCrumbItemProps = ({
   genre,
   clickHandler,
@@ -36,30 +40,37 @@ export const BreadCrumbItem: BreadCrumbItemProps = ({
   </span>
 );
 
-export const BreadCrumb = () => {
+export const BreadCrumb: BreadCrumbProps = ({ applySortCallback }) => {
   const [activeItem, setActiveItem] = useState(0);
 
   const clickHandler = (activeId: number) => {
     setActiveItem(activeId);
   };
 
-  const renderGenreList = () =>
-    genres.map((genre, index) => (
-      <BreadCrumbItem
-        key={index}
-        genre={genre}
-        clickHandler={clickHandler}
-        activeId={index}
-        isActive={activeItem === index}
-      />
-    ));
+  useEffect(() => {
+    console.log(`----> useEffect inside Breadcrumb Component`);
+  });
 
   return (
     <section className={CLASSES.NETFLIX_APP_BREADCRUMB}>
-      <div className={CLASSES.NETFLIX_APP_BREADCRUMB_GENRE}>{renderGenreList()}</div>
+      <div className={CLASSES.NETFLIX_APP_BREADCRUMB_GENRE}>
+        {genres.map((genre, index) => (
+          <BreadCrumbItem
+            key={index}
+            genre={genre}
+            clickHandler={clickHandler}
+            activeId={index}
+            isActive={activeItem === index}
+          />
+        ))}
+      </div>
       <div className={CLASSES.NETFLIX_APP_BREADCRUMB_SORT}>
         <span className={CLASSES.NETFLIX_APP_BREADCRUMB_LABEL}>Sort by</span>
-        <Dropdown options={sortOptions} dropdownType={'simple'} />
+        <Dropdown
+          options={sortOptions}
+          dropdownType={'simple'}
+          callback={applySortCallback}
+        />
       </div>
     </section>
   );
