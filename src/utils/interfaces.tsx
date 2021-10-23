@@ -64,14 +64,17 @@ export interface InputFormProps {
   runtime: string;
 }
 
-export interface StoreProps {
-  items: Array<string>;
-}
-
-export interface MapStateProps<K, G> {
-  (state: StoreProps, ownProps: K): G;
-}
-
-export interface MapDispatchProps<K, G> {
-  (dispatch: any, ownProps: K): G;
-}
+export type MovieItemProps = {
+  id: number;
+  title: string;
+  tagline: string;
+  vote_average: number;
+  vote_count: number;
+  release_date: string;
+  poster_path: string;
+  overview: string;
+  budget: number;
+  revenue: number;
+  genres: Array<string>;
+  runtime: number;
+};

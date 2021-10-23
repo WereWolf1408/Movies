@@ -154,54 +154,5 @@ export const ToolsIcon: ToolsIconProps = ({
   </svg>
 );
 
-//mock data
-export const movies = [
-  {
-    src: 'https://cdna.artstation.com/p/assets/images/images/041/762/826/large/lera-pi-lerapi-stream-commission-oc-arkilia-1.jpg?1632622745',
-    title: 'Pulp Fiction',
-    year: 2004,
-    genre: 'Action & Adventure',
-  },
-  {
-    src: 'https://cdna.artstation.com/p/assets/images/images/041/199/150/large/lera-pi-lerapi-stream-commission-oc-mint2.jpg?1631035037',
-    title: 'Bohemian Rhapsody',
-    year: 2003,
-    genre: 'Drama, Biography, Music',
-  },
-  {
-    src: 'https://cdna.artstation.com/p/assets/images/images/040/790/336/large/lera-pi-lerapi-oc-tyra-patreon-poll-winner1.jpg?1629889007',
-    title: 'Kill Bill: Vol 2',
-    year: 1994,
-    genre: 'Oscar winning Movie',
-  },
-  {
-    src: 'https://cdnb.artstation.com/p/assets/images/images/040/573/949/large/lera-pi-lerapi-stream-commission-oc-arkilia.jpg?1629262158',
-    title: 'Avengers: War of Infinity',
-    year: 2004,
-    genre: 'Action & Adventure',
-  },
-  {
-    src: 'https://cdna.artstation.com/p/assets/images/images/040/530/488/large/lera-pi-lerapi-stream-commission-oc-yae-vel1.jpg?1629140099',
-    title: 'Inception',
-    year: 2003,
-    genre: 'Action & Adventure',
-  },
-  {
-    src: 'https://cdnb.artstation.com/p/assets/images/images/040/003/899/large/lera-pi-lerapi-azula1.jpg?1627567539',
-    title: 'Reservoir dogs',
-    year: 1994,
-    genre: 'Oscar winning Movie',
-  },
-  {
-    src: 'https://cdnb.artstation.com/p/assets/images/images/038/274/789/large/lera-pi-lerapi-make-up-kiseira-ych1.jpg?1622645012',
-    title: 'Tom & Jerry',
-    year: 1990,
-    genre: 'Cartoon',
-  },
-];
-
-export const sortOptions = ['Title', 'Year', 'Genre'];
+export const sortOptions = ['title', 'vote_average', 'release_date'];
 export const genres = ['all', 'Documentary', 'comedy', 'horror', 'crime'];
-export const actions = {
-  GET_DATA: 'GET_DATA',
-};

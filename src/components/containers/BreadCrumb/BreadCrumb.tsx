@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '@utils/utils';
 import './BreadCrumb.less';
+import { useDispatch } from 'react-redux';
+import { sortDataByOption } from '../../../store/ajaxActions';
 
 const CLASSES = {
   NETFLIX_APP_BREADCRUMB: 'netflix-app__breadcrumb',
@@ -20,10 +22,6 @@ type BreadCrumbItemProps = (props: {
   isActive: boolean;
 }) => JSX.Element;
 
-interface BreadCrumbProps {
-  (props: { applySortCallback: () => void }): JSX.Element;
-}
-
 export const BreadCrumbItem: BreadCrumbItemProps = ({
   genre,
   clickHandler,
@@ -40,16 +38,18 @@ export const BreadCrumbItem: BreadCrumbItemProps = ({
   </span>
 );
 
-export const BreadCrumb: BreadCrumbProps = ({ applySortCallback }) => {
+export const BreadCrumb = () => {
+  const dispatch = useDispatch();
   const [activeItem, setActiveItem] = useState(0);
 
   const clickHandler = (activeId: number) => {
     setActiveItem(activeId);
   };
 
-  useEffect(() => {
-    console.log(`----> useEffect inside Breadcrumb Component`);
-  });
+  const dropdownChangeHandler = (value: string) => {
+    console.log(`dropdown change hnadler`);
+    dispatch(sortDataByOption(value));
+  };
 
   return (
     <section className={CLASSES.NETFLIX_APP_BREADCRUMB}>
@@ -69,7 +69,7 @@ export const BreadCrumb: BreadCrumbProps = ({ applySortCallback }) => {
         <Dropdown
           options={sortOptions}
           dropdownType={'simple'}
-          callback={applySortCallback}
+          callback={dropdownChangeHandler}
         />
       </div>
     </section>

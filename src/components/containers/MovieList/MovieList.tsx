@@ -1,6 +1,6 @@
 import React from 'react';
 import {MovieItem} from '@common/MovieItem';
-import { SingleMovieProps } from '@utils/interfaces';
+import { MovieItemProps } from '../../../utils/interfaces';
 
 import './MovieList.less';
 
@@ -9,7 +9,7 @@ const CLASSES = {
 };
 
 interface MovieListProps {
-  (props: { items: Array<SingleMovieProps> }): JSX.Element;
+  (props: { items: Array<MovieItemProps> }): JSX.Element;
 }
 
 export const MovieList: MovieListProps = ({ items }) => (

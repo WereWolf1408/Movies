@@ -32,7 +32,7 @@ export const Dropdown: DropdownProps = ({
   setValue,
   label,
 }) => {
-  const [selected, setSelected] = useState<string>(options[0]);
+  const [selected, setSelected] = useState<string>('select option');
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([options[0]]);
 
