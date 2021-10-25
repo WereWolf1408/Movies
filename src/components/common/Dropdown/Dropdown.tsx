@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
-import { DropdownCallbackProps } from '@utils/interfaces';
+import { DropdownCallbackProps, InputFormProps } from '@utils/interfaces';
+import { UseFormRegister, Path } from 'react-hook-form';
 
 import './Dropdown.less';
 import classNames from 'classnames';
@@ -17,10 +18,18 @@ interface DropdownProps {
     options: Array<string>;
     callback?: DropdownCallbackProps;
     dropdownType: 'simple' | 'multiline';
+    label?: Path<InputFormProps>;
+    register?: UseFormRegister<InputFormProps>;
   }): JSX.Element;
 }
 
-export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => {
+export const Dropdown: DropdownProps = ({
+  callback,
+  options,
+  dropdownType,
+  register,
+  label,
+}) => {
   const [selected, setSelected] = useState<string>(options[0]);
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([options[0]]);
@@ -36,18 +45,16 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { checked } = event.currentTarget;
-    const modifyArr = (): Array<string> => {
-      if (checked) {
-        optionsHolder.push(option);
-        return [...optionsHolder];
-      }
-      const filteredArr = optionsHolder.filter((value) => value !== option);
-      return filteredArr;
-    };
-    const changedArr = modifyArr();
-    setOptionsHolder(changedArr);
-    setSelected(changedArr.toString());
-    callback && callback(changedArr);
+    let newArray = [];
+    if (checked) {
+      optionsHolder.push(option);
+      newArray = [...optionsHolder];
+    } else {
+      newArray = optionsHolder.filter((value) => value !== option);
+    }
+    setOptionsHolder(newArray);
+    setSelected(newArray.toString());
+    callback && callback(newArray);
   };
 
   const selectedOptionClickHandler = () => {
@@ -62,11 +69,40 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
       <input
         className={'netflix-app__input'}
         readOnly={true}
+        {...register(label)}
         onClick={selectedOptionClickHandler}
         value={selected}
       />
     );
   };
+
+  const simpleDropdownOptionView = (item: string, index: number) => (
+    <span
+      key={index}
+      className={classNames({ ['active']: item === selected })}
+      onClick={() => clickHandler(item)}
+    >
+      {item}
+    </span>
+  );
+
+  const multilineDropdownOptionView = (item: string, index: number) => (
+    <div
+      key={index}
+      className={classNames({ ['active']: optionsHolder.includes(item) })}
+    >
+      <label htmlFor="" className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX_LABEL}>
+        <input
+          className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX}
+          type="checkbox"
+          value={item}
+          checked={optionsHolder.includes(item)}
+          onChange={(event) => multilineClickHandler(item, event)}
+        />
+        {item}
+      </label>
+    </div>
+  );
 
   return (
     <div
@@ -78,34 +114,9 @@ export const Dropdown: DropdownProps = ({ callback, options, dropdownType }) => 
       {isOpen && (
         <div className={CLASSES.NETFLIX_APP_DROPDOWN_OPTIONS}>
           {options.map((item, index) => {
-            return dropdownType === 'simple' ? (
-              <span
-                key={index}
-                className={classNames({ ['active']: item === selected })}
-                onClick={() => clickHandler(item)}
-              >
-                {item}
-              </span>
-            ) : (
-              <div
-                key={index}
-                className={classNames({ ['active']: optionsHolder.includes(item) })}
-              >
-                <label
-                  htmlFor=""
-                  className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX_LABEL}
-                >
-                  <input
-                    className={CLASSES.NETFLIX_APP_DROPDOWN_CHECKBOX}
-                    type="checkbox"
-                    value={item}
-                    checked={optionsHolder.includes(item)}
-                    onChange={(event) => multilineClickHandler(item, event)}
-                  />
-                  {item}
-                </label>
-              </div>
-            );
+            return dropdownType === 'simple'
+              ? simpleDropdownOptionView(item, index)
+              : multilineDropdownOptionView(item, index);
           })}
         </div>
       )}

@@ -1,4 +1,6 @@
 import React from 'react';
+import { UseFormRegister, Path } from 'react-hook-form';
+import { InputFormProps } from '@utils/interfaces';
 
 const classnames = require('classnames');
 
@@ -10,10 +12,12 @@ const CLASSES = {
 
 interface InputProps {
   (props: {
-    changeHandler: (event: React.FormEvent<HTMLInputElement>) => void;
+    changeHandler?: (event: React.FormEvent<HTMLInputElement>) => void;
     placeHolder?: string;
     classes?: string;
     value?: string;
+    label?: Path<InputFormProps>;
+    register?: UseFormRegister<InputFormProps>;
   }): JSX.Element;
 }
 
@@ -22,8 +26,16 @@ export const Input: InputProps = ({
   classes,
   changeHandler,
   value,
+  label,
+  register,
 }) => {
-  return (
+  return register ? (
+    <input
+      className={classnames(CLASSES.NETFLIX_INPUT, classes)}
+      placeholder={placeHolder}
+      {...register(label)}
+    />
+  ) : (
     <input
       className={classnames(CLASSES.NETFLIX_INPUT, classes)}
       placeholder={placeHolder}

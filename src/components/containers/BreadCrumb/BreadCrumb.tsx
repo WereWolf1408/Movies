@@ -1,8 +1,7 @@
 import classNames from 'classnames';
 import React, { useState } from 'react';
-import {Dropdown} from '../../common/Dropdown';
+import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '@utils/utils';
-
 import './BreadCrumb.less';
 
 const CLASSES = {
@@ -21,7 +20,7 @@ type BreadCrumbItemProps = (props: {
   isActive: boolean;
 }) => JSX.Element;
 
-const BreadCrumbItem: BreadCrumbItemProps = ({
+export const BreadCrumbItem: BreadCrumbItemProps = ({
   genre,
   clickHandler,
   activeId,

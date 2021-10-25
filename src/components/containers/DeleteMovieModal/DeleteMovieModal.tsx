@@ -1,6 +1,6 @@
 import React from 'react';
-import {Button} from '../../common/Button';
-import {ModalWindow} from '../../common/ModalWindow';
+import { Button } from '../../common/Button';
+import {ModalWindow} from '../../common/ModalWindow/ModalWindow';
 
 import './DeleteMovieModal.less';
 

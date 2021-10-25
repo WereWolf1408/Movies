@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import {Button} from '@common/Button';
-import {Input} from '@common/Input';
+import { Input } from '@common/Input';
 import { Logo } from '@utils/utils';
 import BackgroundImage from '@assets/header_background.jpg';
 
 import './Header.less';
+import { NetflixAppContext } from '../../../Context/Context';
 
 const CLASSES = {
   NETFLIX_APP_LOGO: 'netflix-app__logo',
@@ -18,15 +19,20 @@ const CLASSES = {
 };
 
 interface HeaderProps {
-  (props: { title: string; addMovieClickHandler: () => void }): JSX.Element;
+  (props: { title: string }): JSX.Element;
 }
 
-export const Header: HeaderProps = ({ title, addMovieClickHandler }) => {
+export const Header: HeaderProps = ({ title }) => {
+  const { showAddMovieModal } = useContext(NetflixAppContext);
+
   return (
     <section className={CLASSES.NETFLIX_APP_HEADER}>
       <img className={CLASSES.NETFLIX_APP_BACKGROUND} src={BackgroundImage} alt="" />
       <Logo classes={CLASSES.NETFLIX_APP_LOGO} />
-      <div className={CLASSES.NETFLIX_APP_ADD_MOVIE} onClick={addMovieClickHandler}>
+      <div
+        className={CLASSES.NETFLIX_APP_ADD_MOVIE}
+        onClick={showAddMovieModal.handler}
+      >
         <Button text={'+ add movie'} />
       </div>
       <span className={CLASSES.NETFLIX_APP_TITLE}>{title}</span>
