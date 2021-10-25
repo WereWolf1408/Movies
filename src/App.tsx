@@ -20,20 +20,12 @@ const CLASSES = {
 
 const HEADER_TITLE = 'find your movie';
 
-const TestHOCFunction =
-  HandleLoading<{ title: string; addMovieClickHandler: () => void }>(Header);
+const TestHOCFunction = HandleLoading<{ title: string }>(Header);
 
 export const App = () => {
-  // i am not sure about place, where i called useContext; because in this case each
-  //Context change will cause re-render whole application
-  //but from the other hand React is quite smart and it's not a fact that react will be called re-render each time
   const { showAddMovieModal, showDetails, showEditMoviePopup } =
     useContext(NetflixAppContext);
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
-
-  const addMovieButtonClickHandler = () => {
-    console.log('add movie button was clicked');
-  };
 
   return (
     <section className={CLASSES.NETFLIX_APP}>
@@ -42,7 +34,6 @@ export const App = () => {
         isLoading
         props={{
           title: 'test HOC Component',
-          addMovieClickHandler: addMovieButtonClickHandler,
         }}
       />
       <MovieBody />

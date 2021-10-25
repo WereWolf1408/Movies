@@ -45,25 +45,16 @@ export const Dropdown: DropdownProps = ({
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
     const { checked } = event.currentTarget;
-    const modifyArr = (): Array<string> => {
-      if (checked) {
-        optionsHolder.push(option);
-        return [...optionsHolder];
-      }
-      const filteredArr = optionsHolder.filter((value) => value !== option);
-      return filteredArr;
-    };
-    const changedArr = modifyArr();
-    //ask about time to update state!!! there is some delay when you update state. how to handle case when you need new state immediately
-    //another question the following: is it ok to call below method inside useEffect() ?
-    //i have some concerns is it ok
-    //to divide useState functions, i mean some
-    //of them called inside functions like event
-    //handles and another common functionality move inside useEffect
-    //setSelected(changedArr.toString());
-    setOptionsHolder(changedArr);
-    setSelected(changedArr.toString());
-    callback && callback(changedArr);
+    let newArray = [];
+    if (checked) {
+      optionsHolder.push(option);
+      newArray = [...optionsHolder];
+    } else {
+      newArray = optionsHolder.filter((value) => value !== option);
+    }
+    setOptionsHolder(newArray);
+    setSelected(newArray.toString());
+    callback && callback(newArray);
   };
 
   const selectedOptionClickHandler = () => {

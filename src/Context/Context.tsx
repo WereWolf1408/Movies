@@ -66,7 +66,7 @@ export const NetflixAppContextFunction = ({
       handler: (value = false) =>
         setShowEditMoviePopup((prevProps) => ({ ...prevProps, value })),
     });
-    
+
   const value = {
     showAddMovieModal,
     movieDetail,
