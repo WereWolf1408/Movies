@@ -2,12 +2,10 @@ import React from 'react';
 
 import './HandleLoading.less';
 
-type CallbackProps = { isLoading?: boolean; props?: unknown };
-
 //<T,> - this is a feature of TS laguage; another way to handle it is <T extends {}>
 export const HandleLoading = <T,>(Component: Function) => {
   const Loading = () => (
-    <div>
+    <div className={'spinner'}>
       <h1>Loading....</h1>
     </div>
   );

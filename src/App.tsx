@@ -6,15 +6,17 @@ import { Footer } from './components/containers/Footer';
 import { AddMovieModal } from './components/containers/AddMovieModal';
 import { EditMovieModal } from './components/containers/EditMovieModal';
 import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
-import { NetflixAppContext } from './Context/Context';
 import { MovieDetails } from './components/containers/MovieDetails';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
-import { makeSimpleAjaxRequest, getData } from './store/ajaxActions';
+import { getData } from './store/ajaxActions';
+import { showIdleSpinner } from './store/rootReducer';
+import { ErrorModal } from './components/containers/ErrorModal';
 
 import './App.less';
 
 const TestHOCFunction = HandleLoading<{ title: string }>(Header);
+const MovieBodyLoading = HandleLoading<{}>(MovieBody);
 const HEADER_TITLE = 'find your movie';
 
 const CLASSES = {
@@ -25,20 +27,28 @@ const CLASSES = {
 
 export const App = () => {
   const state = useSelector((state: RootState) => {
-    return state.counter;
+    return {
+      showAddMovieModal: state.mainStore.showAddMovieModal,
+      errorMessage: state.mainStore.errorMessage,
+      showError: state.mainStore.showError,
+      showEditMovieModal: state.mainStore.showEditMovieModal,
+      showMovieDetails: state.additionalStore.showMovieDetails,
+      isLoading: state.mainStore.isLoading,
+    };
   });
   const dispatch = useDispatch();
-  const { showAddMovieModal, showDetails, showEditMoviePopup } =
-    useContext(NetflixAppContext);
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
 
   useEffect(() => {
+    //i am not sure, but something like that should exist
+    //or maybe there is another way how to dispatch 2 actions one after another
+    dispatch(showIdleSpinner());
     dispatch(getData(20));
   }, []);
 
   return (
     <section className={CLASSES.NETFLIX_APP}>
-      {showDetails.value ? <MovieDetails /> : <Header title={HEADER_TITLE} />}
+      {state.showMovieDetails ? <MovieDetails /> : <Header title={HEADER_TITLE} />}
       <TestHOCFunction
         isLoading
         props={{
@@ -47,9 +57,10 @@ export const App = () => {
       />
       <MovieBody />
       <Footer />
-      {showAddMovieModal.value && <AddMovieModal />}
-      {showEditMoviePopup.value && <EditMovieModal />}
+      {state.showAddMovieModal && <AddMovieModal />}
+      {state.showEditMovieModal && <EditMovieModal />}
       {showDeleteMovieModal && <DeleteMovieModal />}
+      {state.showError && <ErrorModal text={state.errorMessage} />}
     </section>
   );
 };

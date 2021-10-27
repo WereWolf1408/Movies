@@ -1,9 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { rootReducer } from './rootReducer';
+import { additionalReducer } from './additionalReducer';
 
 export const store = configureStore({
-  reducer: rootReducer,
+  reducer: {
+    mainStore: rootReducer,
+    additionalStore: additionalReducer,
+  },
 });
 
 export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export const AppDispatch = () => useDispatch<typeof store.dispatch>();

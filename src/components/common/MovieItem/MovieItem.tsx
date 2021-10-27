@@ -1,12 +1,15 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { MovieItemProps } from '../../../utils/interfaces';
-import { ToolsIcon } from '@utils/utils';
+import { ToolsIcon } from '../../../utils/utils';
 
 import './MovieItem.less';
 import { CloseIcon } from '../../../utils/utils';
 import { NetflixAppContext } from '../../../Context/Context';
-import { useDispatch } from 'react-redux';
-import { setSetectedMovie } from '../../../store/rootReducer';
+// import { useDispatch } from 'react-redux';
+import { AppDispatch } from '../../../store/store';
+import { setSetectedMovie } from '../../../store/additionalReducer';
+import { showEditMovieModal } from '../../../store/rootReducer';
+import { removeMovieById, getData } from '../../../store/ajaxActions';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE: 'netflix-app__movie',
@@ -21,7 +24,12 @@ const CLASSES = {
 };
 
 interface MovieProps {
-  (props: { item: MovieItemProps }): JSX.Element;
+  (props: {
+    item: MovieItemProps;
+    showMovieOptions: boolean;
+    openMovieOptionsHandler: (movieId: number) => void;
+    closeMovieOptionsHandler: () => void;
+  }): JSX.Element;
 }
 
 export const MovieItem: MovieProps = ({
@@ -39,25 +47,16 @@ export const MovieItem: MovieProps = ({
     vote_average,
     vote_count,
   },
+  showMovieOptions,
+  openMovieOptionsHandler,
+  closeMovieOptionsHandler,
 }) => {
-  const dispatch = useDispatch();
-  const { showDetails, showEditMoviePopup } =
-    useContext(NetflixAppContext);
-  const [showToolsOption, setShowToolsOption] = useState(false);
-
-  const clickHandler = () => {
-    setShowToolsOption((prevProp) => !prevProp);
-  };
-
-  const closeIconClickHandler = () => {
-    setShowToolsOption(false);
-  };
+  const dispatch = AppDispatch();
 
   const imageClickHandler = () => {
     dispatch(
       setSetectedMovie({
         movie: {
-          id,
           budget,
           genres,
           overview,
@@ -72,26 +71,48 @@ export const MovieItem: MovieProps = ({
         },
       })
     );
-    showDetails.handler(true);
   };
 
-  //move logic from Context to Redux
   const editOptionClickHandler = () => {
-    // movieDetail.handler(title, poster_path, 'genre', 2000);
-    // showEditMoviePopup.handler(true);
+    dispatch(
+      showEditMovieModal({
+        movie: {
+          budget,
+          genres,
+          overview,
+          poster_path,
+          id,
+          revenue,
+          tagline,
+          vote_count,
+          release_date,
+          runtime,
+          title,
+          vote_average,
+        },
+      })
+    );
+  };
+
+  const deleteMovieHandler = () => {
+    dispatch(removeMovieById(id))
+      .unwrap()
+      .then(() => {
+        dispatch(getData(20));
+      });
   };
 
   return (
     <div className={CLASSES.NETFLIX_APP_MOVIE}>
       <ToolsIcon
         classes={CLASSES.NETFLIX_APP_MOVIE_TOOLS}
-        clickHandler={clickHandler}
+        clickHandler={() => openMovieOptionsHandler(id)}
       />
-      {showToolsOption && (
+      {showMovieOptions && (
         <div className={CLASSES.NETFLIX_APP_MOVIE_TOOLS_WINDOW}>
           <CloseIcon
             classes={CLASSES.NETFLIX_APP_MOVIE_TOOLS_CLOSE}
-            clickHandler={closeIconClickHandler}
+            clickHandler={closeMovieOptionsHandler}
           />
           <div
             className={CLASSES.NETFLIX_APP_MOVIE_TOOLS_ITEM}
@@ -99,7 +120,12 @@ export const MovieItem: MovieProps = ({
           >
             Edit
           </div>
-          <div className={CLASSES.NETFLIX_APP_MOVIE_TOOLS_ITEM}>Delete</div>
+          <div
+            className={CLASSES.NETFLIX_APP_MOVIE_TOOLS_ITEM}
+            onClick={deleteMovieHandler}
+          >
+            Delete
+          </div>
         </div>
       )}
       <div className={CLASSES.NETFLIX_APP_MOVIE_iMAGE_WRAPPER}>

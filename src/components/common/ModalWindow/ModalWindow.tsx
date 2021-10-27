@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { CloseIcon } from '@utils/utils';
+import { closeAllModals } from '../../../store/rootReducer';
 
 import './ModalWindow.less';
-import { NetflixAppContext } from '../../../Context/Context';
+import { useDispatch } from 'react-redux';
 
 const CLASSES = {
   NETFLIX_APP_MODAL_WINDOW: 'netflix-app__modal-window',
@@ -17,7 +18,11 @@ interface ModalWindowProps {
 }
 
 export const ModalWindow: ModalWindowProps = ({ children, title }) => {
-  const { closeAllModals } = useContext(NetflixAppContext);
+  const dispatch = useDispatch();
+ 
+  const closeIconClickHandler = () => {
+    dispatch(closeAllModals())
+  };
 
   return (
     <div className={CLASSES.NETFLIX_APP_MODAL_WINDOW}>
@@ -25,7 +30,7 @@ export const ModalWindow: ModalWindowProps = ({ children, title }) => {
         <h1 className={CLASSES.NETFLIX_APP_MODAL_WINDOW_TITLE}>{title}</h1>
         <CloseIcon
           classes={CLASSES.NETFLIX_APP_MODAL_WINDOW_CLOSE}
-          clickHandler={closeAllModals}
+          clickHandler={closeIconClickHandler}
         />
         {children}
       </div>
