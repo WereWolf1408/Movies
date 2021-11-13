@@ -1,8 +1,6 @@
-import React from 'react';
 import { initialState } from './initialState';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
-  makeSimpleAjaxRequest,
   getData,
   sortDataByOption,
   addMovie,
@@ -25,7 +23,6 @@ const counterSlice = createSlice({
       state.showEditMovieModal = false;
     },
     showAddMovieModal: (state, action: PayloadAction<boolean>) => {
-      //how to prevent rerender if we got object with the same value ?
       state.showAddMovieModal = action.payload;
       state.editMovie = null;
     },

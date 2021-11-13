@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { store } from '../Redux/store';
+import { store } from '../store/store';
 import { Dropdown } from '../components/common/Dropdown';
 
 describe('Dropdown Component', () => {

@@ -182,9 +182,5 @@ export const buildSearchURL = (searchQuery: SearchQueryProps) => {
     : 'search=';
   const genrePartURL = genre ? `&searchBy=genres&filter=${genre}` : '';
   const sortByPartURL = sortBy ? `&sortBy=${sortBy}` : '';
-<<<<<<< HEAD
-=======
-  // console.log(`${queryPartURL}${genrePartURL}`);
->>>>>>> d07ec72 (Task 8: Add React Router to the application)
   return `${queryPartURL}${genrePartURL}${sortByPartURL}`;
 };

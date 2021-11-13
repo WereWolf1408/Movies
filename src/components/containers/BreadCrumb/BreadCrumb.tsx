@@ -50,11 +50,7 @@ export const BreadCrumb = () => {
   const {
     searchParams: { genre: stateGenre, query, sortBy },
   } = useSelector((state: RootState) => ({
-<<<<<<< HEAD
     searchParams: state.movies.searchParams,
-=======
-    searchParams: state.mainStore.searchParams,
->>>>>>> d07ec72 (Task 8: Add React Router to the application)
   }));
   const dispatch = useDispatch();
 

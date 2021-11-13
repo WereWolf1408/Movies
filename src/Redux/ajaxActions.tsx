@@ -1,16 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { MovieItemProps, SearchQueryProps } from '../utils/interfaces';
 import { buildSearchURL } from '../utils/utils';
-<<<<<<< HEAD:src/Redux/ajaxActions.tsx
-=======
-
-export const makeSimpleAjaxRequest = createAsyncThunk(
-  'user/simpleRequest',
-  async (id, thunkAPI) => {
-    return Promise.resolve(5000000);
-  }
-);
->>>>>>> d07ec72 (Task 8: Add React Router to the application):src/store/ajaxActions.tsx
 
 export const getData = createAsyncThunk(
   'data/getAllData',
@@ -86,12 +76,9 @@ export const searchMovie = createAsyncThunk(
   'data/searchMovie',
   async (searchQuery: SearchQueryProps, { rejectWithValue }) => {
     try {
-<<<<<<< HEAD:src/Redux/ajaxActions.tsx
-=======
       //old request
       // `http://localhost:4000/movies?search=${searchQuery.query}&searchBy=title`,
       // buildSearchURL(searchQuery);
->>>>>>> d07ec72 (Task 8: Add React Router to the application):src/store/ajaxActions.tsx
       const responce = await fetch(
         `http://localhost:4000/movies?${buildSearchURL(searchQuery)}`,
         {

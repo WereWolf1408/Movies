@@ -8,19 +8,11 @@ import { EditMovieModal } from './components/containers/EditMovieModal';
 import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
 import { MovieDetails } from './components/containers/MovieDetails';
 import { useDispatch, useSelector } from 'react-redux';
-<<<<<<< HEAD
 import { RootState } from './Redux/store';
 import { getData, searchMovie } from './Redux/ajaxActions';
 import { showIdleSpinner, setQueryParams } from './Redux/reducers/moviesReducer';
 import { ErrorModal } from './components/containers/ErrorModal';
 import { useLocation, useSearchParams } from 'react-router-dom';
-=======
-import { RootState } from './store/store';
-import { getData, searchMovie } from './store/ajaxActions';
-import { showIdleSpinner, setQueryParams } from './store/rootReducer';
-import { ErrorModal } from './components/containers/ErrorModal';
-import { useLocation, useParams, useSearchParams } from 'react-router-dom';
->>>>>>> d07ec72 (Task 8: Add React Router to the application)
 
 import './App.less';
 

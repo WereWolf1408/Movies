@@ -1,6 +1,6 @@
 import React from 'react';
 import { CloseIcon } from '../../../utils/utils';
-import { closeAllModals } from '../../../Redux/reducers/modalWindowsReducer';
+import { closeAllModals } from '../../../store/rootReducer';
 
 import './ModalWindow.less';
 import { useDispatch } from 'react-redux';
