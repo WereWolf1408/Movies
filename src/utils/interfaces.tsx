@@ -1,3 +1,5 @@
+import { Validate } from 'react-hook-form';
+
 export interface SingleMovieProps {
   src: string;
   title: string;
@@ -57,15 +59,16 @@ export interface NetflixAppContextProps {
 
 export interface InputFormProps {
   title: string;
-  'movie url': string;
-  genre: string;
-  'release date': string;
-  rating: string;
-  runtime: string;
+  poster_path: string;
+  genres: Array<string>;
+  release_date: string;
+  vote_average: string;
+  runtime: number;
+  overview: string;
 }
 
 export type MovieItemProps = {
-  id: number;
+  id?: number;
   title: string;
   tagline: string;
   vote_average: number;
@@ -78,3 +81,18 @@ export type MovieItemProps = {
   genres: Array<string>;
   runtime: number;
 };
+
+export interface ValidationFormOptionsProps {
+  required?: string;
+  setValueAs?: (value: string) => string[] | string;
+  validate?:
+    | Validate<string | number | string[]>
+    | Record<string, Validate<string | number | string[]>>;
+  valueAsNumber?: boolean;
+  value?: any;
+  onChange?: (e: any) => void;
+  pattern?: {
+    value: any;
+    message: string;
+  };
+}

@@ -14,7 +14,7 @@ const CLASSES = {
 
 export const MovieBody = () => {
   const movies = useSelector((state: RootState) => {
-    return state.data;
+    return state.mainStore.data;
   });
 
   useEffect(() => {

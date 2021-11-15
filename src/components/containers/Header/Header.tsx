@@ -1,11 +1,14 @@
-import React, { useContext } from 'react';
-import {Button} from '@common/Button';
-import { Input } from '@common/Input';
-import { Logo } from '@utils/utils';
+import React, { useContext, useState } from 'react';
+import { Button } from '../../common/Button';
+import { Input } from '../../common/Input';
+import { Logo } from '../../../utils/utils';
 import BackgroundImage from '@assets/header_background.jpg';
+import { showAddMovieModal } from '../../../store/rootReducer';
+import { searchMovie } from '../../../store/ajaxActions';
 
 import './Header.less';
-import { NetflixAppContext } from '../../../Context/Context';
+import { useDispatch } from 'react-redux';
+import { ChangeHandler } from 'react-hook-form';
 
 const CLASSES = {
   NETFLIX_APP_LOGO: 'netflix-app__logo',
@@ -23,7 +26,21 @@ interface HeaderProps {
 }
 
 export const Header: HeaderProps = ({ title }) => {
-  const { showAddMovieModal } = useContext(NetflixAppContext);
+  const dispatch = useDispatch();
+  const [query, setQuery] = useState<string>('');
+
+  const addMovieButtonClickHandler = () => {
+    dispatch(showAddMovieModal(true));
+  };
+
+  const searchInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { value } = e.target;
+    setQuery(value);
+  };
+
+  const searchButtonClickHandler = () => {
+    dispatch(searchMovie(query));
+  };
 
   return (
     <section className={CLASSES.NETFLIX_APP_HEADER}>
@@ -31,19 +48,22 @@ export const Header: HeaderProps = ({ title }) => {
       <Logo classes={CLASSES.NETFLIX_APP_LOGO} />
       <div
         className={CLASSES.NETFLIX_APP_ADD_MOVIE}
-        onClick={showAddMovieModal.handler}
+        onClick={addMovieButtonClickHandler}
       >
         <Button text={'+ add movie'} />
       </div>
       <span className={CLASSES.NETFLIX_APP_TITLE}>{title}</span>
       <div className={CLASSES.NETFLIX_APP_SEARCH_SECTION}>
         <Input
-          changeHandler={() => {
-            console.log('mock press handler');
-          }}
+          changeHandler={searchInputChangeHandler}
           classes={CLASSES.NETFLIX_APP_SEARCH}
+          value={query}
         />
-        <Button text={'Search'} classes={CLASSES.NETFLIX_APP_SEARCH_BUTTON} />
+        <Button
+          text={'Search'}
+          classes={CLASSES.NETFLIX_APP_SEARCH_BUTTON}
+          clickHandler={searchButtonClickHandler}
+        />
       </div>
     </section>
   );

@@ -1,9 +1,16 @@
 import React, { useState } from 'react';
-import { DropdownCallbackProps, InputFormProps } from '@utils/interfaces';
-import { UseFormRegister, Path, UseFormSetValue } from 'react-hook-form';
+import { DropdownCallbackProps, InputFormProps } from '../../../utils/interfaces';
+import {
+  UseFormRegister,
+  Path,
+  UseFormSetValue,
+  Validate,
+  FieldErrors,
+} from 'react-hook-form';
 
 import './Dropdown.less';
 import classNames from 'classnames';
+import { ValidationFormOptionsProps } from '../../../utils/interfaces';
 
 const CLASSES = {
   NETFLIX_APP_DROPDOWN: 'netflix-app__dropdown',
@@ -21,6 +28,8 @@ interface DropdownProps {
     label?: Path<InputFormProps>;
     register?: UseFormRegister<InputFormProps>;
     setValue?: UseFormSetValue<InputFormProps>;
+    validationOptions?: ValidationFormOptionsProps;
+    errors?: string;
   }): JSX.Element;
 }
 
@@ -31,10 +40,12 @@ export const Dropdown: DropdownProps = ({
   register,
   setValue,
   label,
+  validationOptions,
+  errors,
 }) => {
-  const [selected, setSelected] = useState<string>('select option');
+  const [selected, setSelected] = useState<string>('select value');
   const [isOpen, setIsOpen] = useState(false);
-  const [optionsHolder, setOptionsHolder] = useState([options[0]]);
+  const [optionsHolder, setOptionsHolder] = useState([]);
 
   const clickHandler = (option: string) => {
     setSelected(option);
@@ -68,13 +79,20 @@ export const Dropdown: DropdownProps = ({
       return <span onClick={selectedOptionClickHandler}>{selected}</span>;
     }
     return (
-      <input
-        className={'netflix-app__input'}
-        readOnly={true}
-        {...register(label)}
-        onClick={selectedOptionClickHandler}
-        value={selected}
-      />
+      <>
+        <input
+          className={'netflix-app__input'}
+          readOnly={true}
+          {...register(label, validationOptions)}
+          onClick={selectedOptionClickHandler}
+          value={selected}
+        />
+        {errors && (
+          <span className={'netflix-app__input-error-label'}>
+            This is filed is required
+          </span>
+        )}
+      </>
     );
   };
 

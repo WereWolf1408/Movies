@@ -3,8 +3,9 @@ import { NetflixAppContext } from '../../../Context/Context';
 import { Logo, SearchButton } from '@utils/utils';
 
 import './MovieDetails.less';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../../../store/store';
+import { closeMovieDetails } from '../../../store/additionalReducer';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE_DETAILS: 'netflix-app__movie-details',
@@ -27,14 +28,18 @@ const CLASSES = {
 
 export const MovieDetails = () => {
   const selectedMovie = useSelector((state: RootState) => {
-    return state.selectedMovie;
+    return state.additionalStore.selectedMovie;
   });
-  const { showDetails } = useContext(NetflixAppContext);
+  const dispatch = useDispatch();
+
+  const closeMoviewDetailsHandler = () => {
+    dispatch(closeMovieDetails());
+  };
 
   return (
     <section className={CLASSES.NETFLIX_APP_MOVIE_DETAILS}>
       <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_LOGO_SECTION}>
-        <Logo /> <SearchButton clickHandler={() => showDetails.handler()} />
+        <Logo /> <SearchButton clickHandler={closeMoviewDetailsHandler} />
       </div>
       <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_BOTTOM_SECTION}>
         <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_IMAGE}>
@@ -45,7 +50,9 @@ export const MovieDetails = () => {
             <h1 className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_TITLE}>
               {selectedMovie.title}
             </h1>
-            <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_MARK}>{selectedMovie.vote_average}</span>
+            <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_MARK}>
+              {selectedMovie.vote_average}
+            </span>
           </div>
           <span className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_GENRE}>
             {selectedMovie.genres.toString()}
