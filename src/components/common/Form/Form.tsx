@@ -34,6 +34,7 @@ export const Form: FormProps = () => {
     handleSubmit,
     watch,
     formState: { errors },
+    setValue,
   } = useForm();
 
   const onSubmit: SubmitHandler<InputFormProps> = (data) => {
@@ -61,6 +62,7 @@ export const Form: FormProps = () => {
             dropdownType={'multiline'}
             label={'genre'}
             register={register}
+            setValue={setValue}
           />
         </LabelWrapper>
 

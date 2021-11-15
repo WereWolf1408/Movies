@@ -1,9 +1,13 @@
 import React from 'react';
-import { NetflixAppContextFunction } from './Context';
+import { Provider } from 'react-redux';
 import { App } from './App';
+import { NetflixAppContextFunction } from './Context';
+import { store } from './store/store';
 
 export const ContextApp = () => (
-  <NetflixAppContextFunction>
-    <App />
-  </NetflixAppContextFunction>
+  <Provider store={store}>
+    <NetflixAppContextFunction>
+      <App />
+    </NetflixAppContextFunction>
+  </Provider>
 );

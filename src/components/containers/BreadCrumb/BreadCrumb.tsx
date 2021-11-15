@@ -1,8 +1,10 @@
 import classNames from 'classnames';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '@utils/utils';
 import './BreadCrumb.less';
+import { useDispatch } from 'react-redux';
+import { sortDataByOption } from '../../../store/ajaxActions';
 
 const CLASSES = {
   NETFLIX_APP_BREADCRUMB: 'netflix-app__breadcrumb',
@@ -37,29 +39,38 @@ export const BreadCrumbItem: BreadCrumbItemProps = ({
 );
 
 export const BreadCrumb = () => {
+  const dispatch = useDispatch();
   const [activeItem, setActiveItem] = useState(0);
 
   const clickHandler = (activeId: number) => {
     setActiveItem(activeId);
   };
 
-  const renderGenreList = () =>
-    genres.map((genre, index) => (
-      <BreadCrumbItem
-        key={index}
-        genre={genre}
-        clickHandler={clickHandler}
-        activeId={index}
-        isActive={activeItem === index}
-      />
-    ));
+  const dropdownChangeHandler = (value: string) => {
+    console.log(`dropdown change hnadler`);
+    dispatch(sortDataByOption(value));
+  };
 
   return (
     <section className={CLASSES.NETFLIX_APP_BREADCRUMB}>
-      <div className={CLASSES.NETFLIX_APP_BREADCRUMB_GENRE}>{renderGenreList()}</div>
+      <div className={CLASSES.NETFLIX_APP_BREADCRUMB_GENRE}>
+        {genres.map((genre, index) => (
+          <BreadCrumbItem
+            key={index}
+            genre={genre}
+            clickHandler={clickHandler}
+            activeId={index}
+            isActive={activeItem === index}
+          />
+        ))}
+      </div>
       <div className={CLASSES.NETFLIX_APP_BREADCRUMB_SORT}>
         <span className={CLASSES.NETFLIX_APP_BREADCRUMB_LABEL}>Sort by</span>
-        <Dropdown options={sortOptions} dropdownType={'simple'} />
+        <Dropdown
+          options={sortOptions}
+          dropdownType={'simple'}
+          callback={dropdownChangeHandler}
+        />
       </div>
     </section>
   );
