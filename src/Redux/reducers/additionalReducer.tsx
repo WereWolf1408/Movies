@@ -1,4 +1,4 @@
-import { additionalInitialState } from './initialState';
+import { additionalInitialState } from '../initialState';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { MovieItemProps } from '../../utils/interfaces';
 

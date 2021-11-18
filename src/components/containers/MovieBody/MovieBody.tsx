@@ -2,7 +2,7 @@ import React from 'react';
 import { BreadCrumb } from '../BreadCrumb';
 import { MovieList } from '../MovieList/MovieList';
 import { useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
+import { RootState } from '../../../Redux/store';
 
 import './MovieBody.less';
 

@@ -5,7 +5,7 @@ import { Provider } from 'react-redux';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
 import { BreadCrumb } from '../components/containers/BreadCrumb';
-import { store } from '../store/store';
+import { store } from '../Redux/store';
 
 describe('BreadCrumb Component', () => {
   let mockStore: any;

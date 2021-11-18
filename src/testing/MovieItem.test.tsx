@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import { store } from '../store/store';
+import { store } from '../Redux/store';
 import { MovieItem } from '../components/common/MovieItem';
 import { mockMoview } from '../utils/utils';
 
