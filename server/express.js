@@ -14,10 +14,6 @@ app.get(/\.(js|css|map|ico)$/, express.static(path.resolve(__dirname, '../dist')
 
 app.use('*', async (req, res) => {
   const matchRoute = routes.find((route) => matchPath(req.originalUrl, route.path));
-  console.log('------->match router');
-  console.log(matchRoute);
-  console.log(req.originalUrl);
-  console.log('-----------------------');
 
   let componentData = null;
   if (typeof matchRoute?.fetchData === 'function') {
