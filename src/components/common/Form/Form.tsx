@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { InputFormProps } from '../../../utils/interfaces';
+import { InputFormProps, MovieItemProps } from '../../../utils/interfaces';
 import { LabelWrapper } from '../LabelWrapper';
 import { Button } from '../Button/Button';
 import { Input } from '../Input';
 import { DateInput } from '../DateInput';
-import { addMovie, updateMovie } from '../../../Redux/ajaxActions';
+import { addMovie, updateMovie } from '../../../store/ajaxActions';
 
 import './Form.less';
 import { Dropdown } from '../Dropdown/Dropdown';
-import { AppDispatch, RootState } from '../../../Redux/store';
+import { AppDispatch, RootState } from '../../../store/store';
 import { mockMoview } from '../../../utils/utils';
 import { useSelector } from 'react-redux';
 
@@ -38,7 +38,7 @@ export const Form: FormProps = ({ editForm }) => {
   const dispatch = AppDispatch();
   const state = useSelector((state: RootState) => {
     return {
-      editMoview: state.modalWindows.editMovie || null,
+      editMoview: state.mainStore.editMovie || null,
     };
   });
 
@@ -117,8 +117,8 @@ export const Form: FormProps = ({ editForm }) => {
                 }
                 return value.split(',');
               },
-              validate: (value) => {
-                let [a] = value as Array<string>;
+              validate: (v) => {
+                let [a] = v as Array<string>;
                 if (a === 'select option') {
                   return false;
                 }

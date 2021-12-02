@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { Routes, Route, Navigate, matchPath } from 'react-router-dom';
+import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { App } from './App';
 import { DefaultPage } from './components/containers/404Page/DefaultPage';
 

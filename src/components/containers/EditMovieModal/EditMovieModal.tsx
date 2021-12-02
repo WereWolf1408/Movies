@@ -1,6 +1,7 @@
 import React from 'react';
-import { Form } from '../../common/Form';
-import { ModalWindow } from '../../common/ModalWindow/ModalWindow';
+import {Button} from '../../common/Button/Button';
+import {Form} from '../../common/Form';
+import {ModalWindow} from '../../common/ModalWindow/ModalWindow';
 
 import './EditMovieModal.less';
 

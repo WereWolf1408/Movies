@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Button } from '../../common/Button';
 import { Input } from '../../common/Input';
-import BackgroundImage from '../../../../assets/header_background.jpg';
-import { showAddMovieModal } from '../../../Redux/reducers/modalWindowsReducer';
-import { searchMovie } from '../../../Redux/ajaxActions';
+import { Logo } from '../../../utils/utils';
+import BackgroundImage from '@assets/header_background.jpg';
+import { showAddMovieModal } from '../../../store/rootReducer';
+import { searchMovie } from '../../../store/ajaxActions';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../Redux/store';
+import { RootState } from '../../../store/store';
 import { useSearchParams } from 'react-router-dom';
 
 import './Header.less';
@@ -27,7 +28,7 @@ interface HeaderProps {
 
 export const Header: HeaderProps = ({ title }) => {
   const state = useSelector((state: RootState) => ({
-    searchParams: state.movies.searchParams,
+    searchParams: state.mainStore.searchParams,
   }));
   let [, setSearchParams] = useSearchParams();
   const dispatch = useDispatch();

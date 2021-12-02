@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Dropdown } from '../../common/Dropdown';
 import { sortOptions, genres } from '../../../utils/utils';
 import './BreadCrumb.less';
