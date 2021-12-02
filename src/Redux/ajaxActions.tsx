@@ -76,6 +76,9 @@ export const searchMovie = createAsyncThunk(
   'data/searchMovie',
   async (searchQuery: SearchQueryProps, { rejectWithValue }) => {
     try {
+      //old request
+      // `http://localhost:4000/movies?search=${searchQuery.query}&searchBy=title`,
+      // buildSearchURL(searchQuery);
       const responce = await fetch(
         `http://localhost:4000/movies?${buildSearchURL(searchQuery)}`,
         {
