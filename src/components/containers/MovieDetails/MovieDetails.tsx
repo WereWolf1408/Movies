@@ -1,11 +1,10 @@
-import React, { useContext, useEffect } from 'react';
-import { NetflixAppContext } from '../../../Context/Context';
-import { Logo, SearchButton } from '@utils/utils';
+import React from 'react';
+import { Logo, SearchButton } from '../../../utils/utils';
 
 import './MovieDetails.less';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '../../../store/store';
-import { closeMovieDetails } from '../../../store/additionalReducer';
+import { RootState } from '../../../Redux/store';
+import { closeMovieDetails } from '../../../Redux/reducers/additionalReducer';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE_DETAILS: 'netflix-app__movie-details',
@@ -43,7 +42,7 @@ export const MovieDetails = () => {
       </div>
       <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_BOTTOM_SECTION}>
         <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_IMAGE}>
-          <img src={selectedMovie.poster_path} alt="" />
+          <img src={selectedMovie.poster_path} alt="image" />
         </div>
         <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_DETAILS_SECTION}>
           <div className={CLASSES.NETFLIX_APP_MOVIE_DETAILS_TITLE_SECTION}>

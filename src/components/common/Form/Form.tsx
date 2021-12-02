@@ -1,15 +1,15 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { InputFormProps, MovieItemProps } from '../../../utils/interfaces';
+import { InputFormProps } from '../../../utils/interfaces';
 import { LabelWrapper } from '../LabelWrapper';
 import { Button } from '../Button/Button';
 import { Input } from '../Input';
 import { DateInput } from '../DateInput';
-import { addMovie, updateMovie } from '../../../store/ajaxActions';
+import { addMovie, updateMovie } from '../../../Redux/ajaxActions';
 
 import './Form.less';
 import { Dropdown } from '../Dropdown/Dropdown';
-import { AppDispatch, RootState } from '../../../store/store';
+import { AppDispatch, RootState } from '../../../Redux/store';
 import { mockMoview } from '../../../utils/utils';
 import { useSelector } from 'react-redux';
 
@@ -32,14 +32,13 @@ export const Form: FormProps = ({ editForm }) => {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
     setValue,
   } = useForm<InputFormProps>();
   const dispatch = AppDispatch();
   const state = useSelector((state: RootState) => {
     return {
-      editMoview: state.mainStore.editMovie || null,
+      editMoview: state.modalWindows.editMovie || null,
     };
   });
 
@@ -109,7 +108,6 @@ export const Form: FormProps = ({ editForm }) => {
             dropdownType={'multiline'}
             label={'genres'}
             register={register}
-            setValue={setValue}
             errors={errors && '1'}
             validationOptions={{
               required: 'this is filed is reuqired',
@@ -119,8 +117,8 @@ export const Form: FormProps = ({ editForm }) => {
                 }
                 return value.split(',');
               },
-              validate: (v) => {
-                let [a] = v as Array<string>;
+              validate: (value) => {
+                let [a] = value as Array<string>;
                 if (a === 'select option') {
                   return false;
                 }

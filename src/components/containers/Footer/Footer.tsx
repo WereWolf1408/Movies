@@ -1,5 +1,5 @@
 import React from 'react';
-import { Logo } from '@utils/utils';
+import { Logo } from '../../../utils/utils';
 
 import './Footer.less';
 

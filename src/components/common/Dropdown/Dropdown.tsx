@@ -1,16 +1,10 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { DropdownCallbackProps, InputFormProps } from '../../../utils/interfaces';
-import {
-  UseFormRegister,
-  Path,
-  UseFormSetValue,
-  Validate,
-  FieldErrors,
-} from 'react-hook-form';
-
-import './Dropdown.less';
+import { UseFormRegister, Path } from 'react-hook-form';
 import classNames from 'classnames';
 import { ValidationFormOptionsProps } from '../../../utils/interfaces';
+
+import './Dropdown.less';
 
 const CLASSES = {
   NETFLIX_APP_DROPDOWN: 'netflix-app__dropdown',
@@ -23,13 +17,13 @@ const CLASSES = {
 interface DropdownProps {
   (props: {
     options: Array<string>;
-    callback?: DropdownCallbackProps;
     dropdownType: 'simple' | 'multiline';
     label?: Path<InputFormProps>;
-    register?: UseFormRegister<InputFormProps>;
-    setValue?: UseFormSetValue<InputFormProps>;
     validationOptions?: ValidationFormOptionsProps;
     errors?: string;
+    selectedValue?: string;
+    callback?: DropdownCallbackProps;
+    register?: UseFormRegister<InputFormProps>;
   }): JSX.Element;
 }
 
@@ -38,14 +32,22 @@ export const Dropdown: DropdownProps = ({
   options,
   dropdownType,
   register,
-  setValue,
   label,
   validationOptions,
   errors,
+  selectedValue,
 }) => {
   const [selected, setSelected] = useState<string>('select value');
   const [isOpen, setIsOpen] = useState(false);
   const [optionsHolder, setOptionsHolder] = useState([]);
+
+  useEffect(() => {
+    if (selectedValue) {
+      setSelected(selectedValue);
+    } else {
+      setSelected('select value');
+    }
+  }, [selectedValue]);
 
   const clickHandler = (option: string) => {
     setSelected(option);
@@ -86,6 +88,7 @@ export const Dropdown: DropdownProps = ({
           {...register(label, validationOptions)}
           onClick={selectedOptionClickHandler}
           value={selected}
+          placeholder={'select value'}
         />
         {errors && (
           <span className={'netflix-app__input-error-label'}>
@@ -118,6 +121,7 @@ export const Dropdown: DropdownProps = ({
           value={item}
           checked={optionsHolder.includes(item)}
           onChange={(event) => multilineClickHandler(item, event)}
+          role={'checkbox'}
         />
         {item}
       </label>

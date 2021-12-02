@@ -1,4 +1,4 @@
-import { MovieItemProps } from '../utils/interfaces';
+import { MovieItemProps, SearchQueryProps } from '../utils/interfaces';
 
 interface InitialStateProps {
   data: Array<MovieItemProps>;
@@ -10,6 +10,7 @@ interface InitialStateProps {
   deleteMovieById: number;
   searchValue: string;
   isLoading: boolean;
+  searchParams: SearchQueryProps;
 }
 
 interface AdditionalInitialState {
@@ -28,6 +29,11 @@ export const initialState: InitialStateProps = {
   deleteMovieById: null,
   searchValue: null,
   isLoading: false,
+  searchParams: {
+    genre: '',
+    query: '',
+    sortBy: '',
+  },
 };
 
 export const additionalInitialState: AdditionalInitialState = {

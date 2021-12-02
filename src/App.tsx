@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Header } from './components/containers/Header';
 import { HandleLoading } from './components/HOC/HandleLoading';
 import { MovieBody } from './components/containers/MovieBody';
@@ -8,15 +8,15 @@ import { EditMovieModal } from './components/containers/EditMovieModal';
 import { DeleteMovieModal } from './components/containers/DeleteMovieModal';
 import { MovieDetails } from './components/containers/MovieDetails';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from './store/store';
-import { getData } from './store/ajaxActions';
-import { showIdleSpinner } from './store/rootReducer';
+import { RootState } from './Redux/store';
+import { getData, searchMovie } from './Redux/ajaxActions';
+import { showIdleSpinner, setQueryParams } from './Redux/reducers/moviesReducer';
 import { ErrorModal } from './components/containers/ErrorModal';
+import { useLocation, useSearchParams } from 'react-router-dom';
 
 import './App.less';
 
 const TestHOCFunction = HandleLoading<{ title: string }>(Header);
-const MovieBodyLoading = HandleLoading<{}>(MovieBody);
 const HEADER_TITLE = 'find your movie';
 
 const CLASSES = {
@@ -26,25 +26,40 @@ const CLASSES = {
 };
 
 export const App = () => {
+  const location = useLocation();
+  let [searchParams] = useSearchParams();
+  const genre = searchParams.get('genre');
+  const searchQuery = searchParams.get('searchQuery');
+  const sortBy = searchParams.get('sortBy');
   const state = useSelector((state: RootState) => {
     return {
-      showAddMovieModal: state.mainStore.showAddMovieModal,
-      errorMessage: state.mainStore.errorMessage,
-      showError: state.mainStore.showError,
-      showEditMovieModal: state.mainStore.showEditMovieModal,
+      showAddMovieModal: state.modalWindows.showAddMovieModal,
+      errorMessage: state.movies.errorMessage,
+      showError: state.movies.showError,
+      showEditMovieModal: state.modalWindows.showEditMovieModal,
       showMovieDetails: state.additionalStore.showMovieDetails,
-      isLoading: state.mainStore.isLoading,
+      isLoading: state.movies.isLoading,
     };
   });
   const dispatch = useDispatch();
   const [showDeleteMovieModal, setShowDeleteMovieModal] = useState(false);
 
   useEffect(() => {
-    //i am not sure, but something like that should exist
-    //or maybe there is another way how to dispatch 2 actions one after another
-    dispatch(showIdleSpinner());
-    dispatch(getData(20));
-  }, []);
+    if (location.pathname !== '/search') {
+      dispatch(showIdleSpinner());
+      dispatch(getData(20));
+    }
+  }, [location.pathname]);
+
+  useEffect(() => {
+    const params = {
+      genre: genre || '',
+      query: searchQuery || '',
+      sortBy: sortBy || '',
+    };
+    dispatch(setQueryParams(params));
+    dispatch(searchMovie(params));
+  }, [searchQuery, genre, sortBy]);
 
   return (
     <section className={CLASSES.NETFLIX_APP}>

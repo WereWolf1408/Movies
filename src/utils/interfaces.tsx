@@ -96,3 +96,9 @@ export interface ValidationFormOptionsProps {
     message: string;
   };
 }
+
+export interface SearchQueryProps {
+  query: string;
+  genre: string;
+  sortBy: string;
+}

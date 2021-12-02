@@ -1,15 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React from 'react';
 import { MovieItemProps } from '../../../utils/interfaces';
 import { ToolsIcon } from '../../../utils/utils';
 
 import './MovieItem.less';
 import { CloseIcon } from '../../../utils/utils';
-import { NetflixAppContext } from '../../../Context/Context';
-// import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../store/store';
-import { setSetectedMovie } from '../../../store/additionalReducer';
-import { showEditMovieModal } from '../../../store/rootReducer';
-import { removeMovieById, getData } from '../../../store/ajaxActions';
+import { AppDispatch } from '../../../Redux/store';
+import { setSetectedMovie } from '../../../Redux/reducers/additionalReducer';
+import { showEditMovieModal } from '../../../Redux/reducers/modalWindowsReducer';
+import { removeMovieById, getData } from '../../../Redux/ajaxActions';
 
 const CLASSES = {
   NETFLIX_APP_MOVIE: 'netflix-app__movie',
@@ -132,7 +130,7 @@ export const MovieItem: MovieProps = ({
         <img
           className={CLASSES.NETFLIX_APP_MOVIE_iMAGE}
           src={poster_path}
-          alt=""
+          alt="image"
           onClick={imageClickHandler}
         />
       </div>

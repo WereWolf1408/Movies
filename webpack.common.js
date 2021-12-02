@@ -3,7 +3,6 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 module.exports = {
-  entry: './src/index.tsx',
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'index_bundle.js',
@@ -47,6 +46,10 @@ module.exports = {
         },
       },
     ],
+  },
+  devServer: {
+    historyApiFallback: true,
+    hot: true,
   },
   resolve: {
     alias: {

@@ -1,7 +1,5 @@
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-
 module.exports = {
+  entry: './src/index.dev.tsx',
   mode: 'development',
   devtool: 'inline-source-map',
   devServer: {
